@@ -30,13 +30,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-      - name: Build
-        run: npm run build
-        env:
-          CI: false
 
       - name: Build
         run: npm run build
+        env:
+          CI: "false"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
