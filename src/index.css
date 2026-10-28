@@ -1294,3 +1294,49 @@ button:disabled {
 .student-entry-button:hover { background: #ef1d2a25; }
 .student-footnote { margin: 22px 0 0; color: #64748b; font-size: 11px; text-align: center; }
 @media (max-width: 600px) { .student-portal { padding: 18px 12px; } .student-header { margin: 4px 0 20px; } .student-header h1 { font-size: 20px; } .student-select-form { grid-template-columns: 1fr; } .student-submit { grid-column: auto; } .student-results-heading { align-items: flex-start; flex-direction: column; } }
+
+
+/* Responsive student schedule cards and clean print layout */
+.student-results-heading > div { min-width: 0; }
+.student-results-heading > div span { display: block; margin-top: 5px; }
+.student-print-button { flex-shrink: 0; }
+@media (max-width: 600px) {
+  .student-results .table-container { overflow: visible; padding: 12px; }
+  .student-results .student-table { display: block; min-width: 0; width: 100%; white-space: normal; }
+  .student-results .student-table thead { display: none; }
+  .student-results .student-table tbody { display: grid; gap: 12px; }
+  .student-results .student-table tr { display: grid; gap: 0; overflow: hidden; background: #0b0f16; border: 1px solid var(--border); border-radius: 12px; }
+  .student-results .student-table td { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; padding: 11px 12px; white-space: normal; text-align: left; border-top: 1px solid #202630; font-size: 12px; }
+  .student-results .student-table td:first-child { border-top: 0; }
+  .student-results .student-table td::before { content: attr(data-label); flex-shrink: 0; color: var(--muted); font-weight: 700; text-align: right; }
+  .student-results .student-table td > strong { text-align: left; overflow-wrap: anywhere; }
+  .student-results .student-table .hall-cell { justify-content: flex-end; }
+  .student-results-heading { align-items: stretch; }
+  .student-print-button { width: 100%; }
+}
+@media print {
+  @page { size: A4 landscape; margin: 14mm; }
+  body, .student-portal { min-height: 0 !important; padding: 0 !important; color: #172033 !important; background: #fff !important; }
+  .student-main { width: 100% !important; max-width: none !important; margin: 0 !important; }
+  .student-header { margin: 0 0 18px !important; padding-bottom: 14px; border-bottom: 2px solid #e5e7eb; }
+  .student-brand-icon { width: 42px !important; height: 42px !important; color: #fff !important; background: #ef1d2a !important; box-shadow: none !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .student-header h1 { color: #111827 !important; font-size: 22px !important; }
+  .student-header p { color: #64748b !important; }
+  .student-card { padding: 0 !important; color: #172033 !important; background: #fff !important; border: 0 !important; box-shadow: none !important; }
+  .student-card > .eyebrow, .student-card > h2, .student-description, .student-select-form, .student-back-button, .student-footnote, .student-print-button, .notice { display: none !important; }
+  .student-results { margin: 0 !important; overflow: visible !important; background: #fff !important; border: 1px solid #d1d5db !important; border-radius: 8px !important; }
+  .student-results-heading { padding: 14px 16px !important; color: #111827 !important; background: #f8fafc !important; border-bottom: 1px solid #d1d5db !important; }
+  .student-results-heading h3 { color: #111827 !important; font-size: 18px !important; }
+  .student-results-heading > div span, .student-results-heading span { color: #475569 !important; }
+  .student-results .table-container { overflow: visible !important; padding: 0 !important; }
+  .student-results .student-table { display: table !important; width: 100% !important; min-width: 0 !important; white-space: normal !important; border-collapse: collapse !important; }
+  .student-results .student-table thead { display: table-header-group !important; background: #f1f5f9 !important; }
+  .student-results .student-table tbody { display: table-row-group !important; }
+  .student-results .student-table tr { display: table-row !important; background: #fff !important; border: 0 !important; break-inside: avoid; }
+  .student-results .student-table th, .student-results .student-table td { display: table-cell !important; padding: 10px 12px !important; color: #172033 !important; font-size: 11px !important; text-align: right !important; border: 1px solid #d1d5db !important; }
+  .student-results .student-table td::before { display: none !important; }
+  .student-results .student-table td strong { color: #111827 !important; }
+  .student-results .hall-cell, .student-results .hall-cell svg { color: #172033 !important; }
+  .student-results .lecture-name strong { color: #111827 !important; }
+  .student-results .empty-state { color: #475569 !important; }
+}
