@@ -1269,3 +1269,28 @@ button:disabled {
     border-color: #d1d5db;
   }
 }
+
+/* Student timetable portal */
+.student-portal { min-height: 100vh; padding: 28px 18px; background: radial-gradient(ellipse at top, #17101a 0%, var(--bg) 55%); }
+.student-main { width: min(100%, 1000px); margin: 0 auto; }
+.student-header { display: flex; align-items: center; gap: 14px; margin: 10px 0 28px; }
+.student-brand-icon { display: grid; place-items: center; width: 54px; height: 54px; color: white; background: linear-gradient(135deg, #ef1d2a, #a90e18); border-radius: 16px; box-shadow: 0 8px 24px #ef1d2a33; }
+.student-header h1 { margin: 0; font-size: 23px; font-weight: 800; }
+.student-header p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+.student-card { padding: clamp(20px, 4vw, 34px); background: #0e131bf2; border: 1px solid var(--border); border-radius: 20px; box-shadow: 0 24px 70px #0005; }
+.student-card > h2 { margin: 0; font-size: clamp(23px, 4vw, 32px); font-weight: 800; }
+.student-description { margin: 8px 0 24px; color: var(--muted); font-size: 13px; line-height: 1.9; }
+.student-select-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
+.student-select-form .form-field { margin-bottom: 14px; }
+.student-submit { grid-column: 1 / -1; min-height: 46px; margin-top: 2px; }
+.student-results { margin-top: 28px; overflow: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; }
+.student-results-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+.student-results-heading h3 { margin: 0; font-size: 15px; }
+.student-results-heading span { color: #ffb4b8; font-size: 12px; white-space: nowrap; }
+.student-table { min-width: 720px; }
+.student-back-button { display: block; margin: 22px auto 0; padding: 10px 14px; color: #d1d5db; background: transparent; border: 1px solid var(--border); border-radius: 9px; }
+.student-back-button:hover { color: white; background: var(--surface-hover); }
+.student-entry-button { display: flex; align-items: center; justify-content: center; gap: 9px; width: 100%; min-height: 44px; margin-top: 12px; color: #ffb4b8; background: #ef1d2a12; border: 1px solid #ef1d2a55; border-radius: 9px; font-weight: 700; }
+.student-entry-button:hover { background: #ef1d2a25; }
+.student-footnote { margin: 22px 0 0; color: #64748b; font-size: 11px; text-align: center; }
+@media (max-width: 600px) { .student-portal { padding: 18px 12px; } .student-header { margin: 4px 0 20px; } .student-header h1 { font-size: 20px; } .student-select-form { grid-template-columns: 1fr; } .student-submit { grid-column: auto; } .student-results-heading { align-items: flex-start; flex-direction: column; } }
