@@ -43,6 +43,7 @@ const DEPARTMENTS = [
 ];
 
 const HALLS = ["مدرج 1", "مدرج 2", "مدرج 3", "مدرج 4"];
+const STUDY_YEARS = ["الأولى", "الثانية", "الثالثة", "الرابعة"];
 
 const INITIAL_LECTURES = [
   {
@@ -91,6 +92,7 @@ const EMPTY_FORM = {
   name: "",
   doctor: "",
   department: "تكنولوجيا التعليم",
+  studyYear: "الأولى",
   hall: "مدرج 1",
   day: "الأحد",
   startTime: "08:00",
@@ -103,6 +105,7 @@ function mapDbLecture(row) {
     name: row.title,
     doctor: row.instructor || "",
     department: row.departments?.name || "تكنولوجيا التعليم",
+    studyYear: row.study_year || "",
     hall: row.halls?.name || "مدرج 1",
     day: row.day_of_week || "الأحد",
     startTime: String(row.start_time || "09:00").slice(0, 5),
@@ -129,6 +132,7 @@ async function toDbLecture(lecture) {
     title: lecture.name.trim(),
     instructor: lecture.doctor.trim(),
     department_id,
+    study_year: lecture.studyYear,
     hall_id,
     day_of_week: lecture.day,
     start_time: lecture.startTime,
@@ -159,6 +163,13 @@ function App() {
   const [notice, setNotice] = useState(null);
   const [form, setForm] = useState(EMPTY_FORM);
   const [editingId, setEditingId] = useState(null);
+  const [showStudentPortal, setShowStudentPortal] = useState(false);
+  const [studentDepartment, setStudentDepartment] = useState(DEPARTMENTS[0]);
+  const [studentYear, setStudentYear] = useState(STUDY_YEARS[0]);
+  const [studentLectures, setStudentLectures] = useState([]);
+  const [studentLoading, setStudentLoading] = useState(false);
+  const [studentSearched, setStudentSearched] = useState(false);
+  const [studentError, setStudentError] = useState("");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -179,7 +190,7 @@ function App() {
     let active = true;
     setDataLoading(true);
     supabase.from("lectures")
-      .select("id,title,instructor,day_of_week,start_time,end_time,departments(name),halls(name)")
+      .select("id,title,instructor,day_of_week,start_time,end_time,study_year,departments(name),halls(name)")
       .order("day_of_week").order("start_time")
       .then(({ data, error }) => {
         if (!active) return;
@@ -201,6 +212,27 @@ function App() {
   async function signOut() {
     const { error } = await supabase.auth.signOut();
     if (error) setNotice({ type: "error", message: error.message });
+  }
+
+  async function loadStudentSchedule(event) {
+    event.preventDefault();
+    setStudentLoading(true);
+    setStudentError("");
+    setStudentSearched(true);
+    const { data, error } = await supabase
+      .from("lectures")
+      .select("id,title,instructor,day_of_week,start_time,end_time,study_year,departments!inner(name),halls(name)")
+      .eq("study_year", studentYear)
+      .eq("departments.name", studentDepartment)
+      .order("day_of_week")
+      .order("start_time");
+    if (error) {
+      setStudentError(`تعذر تحميل الجدول: ${error.message}`);
+      setStudentLectures([]);
+    } else {
+      setStudentLectures((data || []).map(mapDbLecture).sort((a, b) => DAYS.indexOf(a.day) - DAYS.indexOf(b.day) || a.startTime.localeCompare(b.startTime)));
+    }
+    setStudentLoading(false);
   }
 
   function updateForm(event) {
@@ -259,7 +291,7 @@ function App() {
     try {
       const payload = await toDbLecture (form);
       const { data, error } = await supabase.from("lectures").insert(payload)
-        .select("id,title,instructor,day_of_week,start_time,end_time,departments(name),halls(name)").single();
+        .select("id,title,instructor,day_of_week,start_time,end_time,study_year,departments(name),halls(name)").single();
       if (error) throw error;
       setLectures((previous) => [...previous, mapDbLecture(data)]);
       setNotice({ type: "success", message: "تمت إضافة المحاضرة وحفظها في قاعدة البيانات." });
@@ -374,6 +406,7 @@ function App() {
       name: lecture.name,
       doctor: lecture.doctor,
       department: lecture.department,
+      studyYear: lecture.studyYear || "الأولى",
       hall: lecture.hall,
       day: lecture.day,
       startTime: lecture.startTime,
@@ -432,7 +465,7 @@ function App() {
     try {
       const payload = await toDbLecture(form);
       const { data, error } = await supabase.from("lectures").update(payload).eq("id", editingId)
-        .select("id,title,instructor,day_of_week,start_time,end_time,departments(name),halls(name)").single();
+        .select("id,title,instructor,day_of_week,start_time,end_time,study_year,departments(name),halls(name)").single();
       if (error) throw error;
       setLectures((previous) => previous.map((lecture) => lecture.id === editingId ? mapDbLecture(data) : lecture));
       setNotice({ type: "success", message: "تم تعديل المحاضرة وحفظ التغييرات." });
@@ -449,6 +482,28 @@ function App() {
     return <div className="app-shell" dir="rtl"><main className="main-content"><h2>جارٍ الاتصال بقاعدة البيانات...</h2></main></div>;
   }
 
+  if (!session && showStudentPortal) {
+    return (
+      <div className="app-shell student-portal" dir="rtl">
+        <main className="student-main">
+          <header className="student-header"><div className="student-brand-icon"><GraduationCap size={28} /></div><div><h1>EduSchedule</h1><p>بوابة الطالب — جدول محاضراتك</p></div></header>
+          <section className="student-card"><p className="eyebrow">بوابة الطلاب</p><h2>اعرف جدولك الدراسي</h2><p className="student-description">اختار القسم والفرقة علشان تعرض المحاضرات الخاصة بيك.</p>
+            <form className="student-select-form" onSubmit={loadStudentSchedule}>
+              <label className="form-field"><span>القسم</span><select value={studentDepartment} onChange={(e) => { setStudentDepartment(e.target.value); setStudentSearched(false); }}>{DEPARTMENTS.map((department) => <option key={department} value={department}>{department}</option>)}</select></label>
+              <label className="form-field"><span>الفرقة الدراسية</span><select value={studentYear} onChange={(e) => { setStudentYear(e.target.value); setStudentSearched(false); }}>{STUDY_YEARS.map((year) => <option key={year} value={year}>الفرقة {year}</option>)}</select></label>
+              <button className="primary-button student-submit" type="submit" disabled={studentLoading}><CalendarDays size={18} />{studentLoading ? "جارٍ تحميل الجدول..." : "عرض الجدول"}</button>
+            </form>
+            {studentError && <div className="notice error" role="alert">{studentError}</div>}
+            {studentSearched && !studentLoading && !studentError && <section className="student-results"><div className="student-results-heading"><h3>جدول {studentDepartment} — الفرقة {studentYear}</h3><span>{studentLectures.length} محاضرة</span></div>
+              {studentLectures.length ? <div className="table-container"><table className="lectures-table student-table"><thead><tr><th>المادة</th><th>الدكتور</th><th>اليوم</th><th>التوقيت</th><th>المدرج</th></tr></thead><tbody>{studentLectures.map((lecture) => <tr key={lecture.id}><td><strong>{lecture.name}</strong></td><td>{lecture.doctor || "—"}</td><td>{lecture.day}</td><td>{formatTime(lecture.startTime)} – {formatTime(lecture.endTime)}</td><td><span className="hall-cell"><MapPin size={15} />{lecture.hall}</span></td></tr>)}</tbody></table></div> : <div className="empty-state"><CalendarDays size={30} /><strong>لسه مفيش جدول للفرقة دي</strong><p>المسؤول لسه ما أضافش محاضرات للفرقة دي.</p></div>}
+            </section>}
+            <button className="student-back-button" type="button" onClick={() => { setShowStudentPortal(false); setStudentSearched(false); setStudentError(""); }}>العودة لتسجيل دخول المسؤول</button>
+          </section><p className="student-footnote">EduSchedule · نظام الجدولة الجامعية</p>
+        </main>
+      </div>
+    );
+  }
+
   if (!session) {
     return (
       <div className="app-shell" dir="rtl" style={{ minHeight: "100vh", display: "grid", placeItems: "center", padding: 24 }}>
@@ -463,6 +518,7 @@ function App() {
           <input type="password" required autoComplete="current-password" value={authPassword} onChange={e => setAuthPassword(e.target.value)} placeholder="••••••••" style={{ width: "100%", boxSizing: "border-box", marginBottom: 20, padding: 12, borderRadius: 8, background: "#080B10", color: "white", border: "1px solid #252C36" }} />
           <button type="submit" disabled={authBusy} className="primary-button" style={{ width: "100%", justifyContent: "center" }}>{authBusy ? "جارٍ تسجيل الدخول..." : "تسجيل الدخول"}</button>
           <p style={{ fontSize: 12, opacity: .65, marginTop: 16, lineHeight: 1.8 }}>يجب إنشاء حساب المدير من Supabase Dashboard → Authentication → Users أولًا.</p>
+          <button type="button" className="student-entry-button" onClick={() => setShowStudentPortal(true)}><GraduationCap size={18} /> أنا طالب — عرض الجدول</button>
         </form>
       </div>
     );
@@ -915,6 +971,10 @@ function App() {
                   </select>
                 </label>
 
+                <label className="form-field">
+                  <span>الفرقة الدراسية *</span>
+                  <select name="studyYear" value={form.studyYear} onChange={updateForm} required>{STUDY_YEARS.map((year) => <option key={year} value={year}>الفرقة {year}</option>)}</select>
+                </label>
                 <label className="form-field">
                   <span>المدرج *</span>
                   <select
