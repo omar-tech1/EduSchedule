@@ -1920,8 +1920,7 @@ body {
 /* College cover, logo and deferred administrator login */
 .welcome-photo {
   background-image:
-    linear-gradient(155deg, rgba(26, 67, 49, 0.08), rgba(18, 48, 39, 0.7)),
-    url("/EduSchedule/college-cover.png");
+    linear-gradient(155deg, rgba(26, 67, 49, 0.08), rgba(18, 48, 39, 0.7));
   background-position: center;
   background-size: cover;
 }
