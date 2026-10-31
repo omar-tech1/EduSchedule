@@ -1340,3 +1340,578 @@ button:disabled {
   .student-results .lecture-name strong { color: #111827 !important; }
   .student-results .empty-state { color: #475569 !important; }
 }
+
+
+/* Botanical welcome and timetable theme */
+:root {
+  --botanical-ink: #2f5545;
+  --botanical-deep: #214738;
+  --botanical-leaf: #6fbd87;
+  --botanical-paper: #fbfaf7;
+  --botanical-cream: #f1eee4;
+  --botanical-line: #dfe5dc;
+}
+
+body {
+  color: var(--botanical-ink);
+  background: var(--botanical-cream);
+}
+
+.welcome-screen {
+  display: grid;
+  grid-template-columns: minmax(280px, 38%) minmax(0, 1fr);
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--botanical-cream);
+}
+
+.welcome-photo {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 100vh;
+  padding: 7vh 4vw;
+  overflow: hidden;
+  color: white;
+  background:
+    linear-gradient(155deg, rgba(23, 69, 49, 0.2), rgba(18, 48, 39, 0.86)),
+    radial-gradient(circle at 68% 30%, #d0a86a 0 11%, transparent 11.5%),
+    linear-gradient(135deg, #8eaf91 0%, #456d59 43%, #214738 100%);
+}
+
+.welcome-photo::before,
+.welcome-photo::after {
+  position: absolute;
+  content: "";
+  border-radius: 50%;
+  filter: blur(1px);
+  opacity: 0.45;
+}
+
+.welcome-photo::before {
+  width: 320px;
+  height: 560px;
+  top: -160px;
+  right: -110px;
+  background: #d9e6c9;
+  transform: rotate(24deg);
+}
+
+.welcome-photo::after {
+  width: 300px;
+  height: 470px;
+  bottom: -180px;
+  left: -80px;
+  background: #95bc83;
+  transform: rotate(-23deg);
+}
+
+.welcome-photo-shape {
+  position: absolute;
+  inset: 12% 9% 12% 9%;
+  border: 2px solid rgba(255, 255, 255, 0.34);
+  border-radius: 46% 54% 39% 61% / 42% 34% 66% 58%;
+  transform: rotate(-12deg);
+}
+
+.welcome-photo-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 6px;
+  max-width: 260px;
+  padding: 18px 20px;
+  border-right: 3px solid var(--botanical-leaf);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.24);
+}
+
+.welcome-photo-copy span {
+  font-size: clamp(21px, 2.7vw, 34px);
+  font-weight: 800;
+}
+
+.welcome-photo-copy small {
+  font-size: 10px;
+  letter-spacing: 1.4px;
+}
+
+.welcome-panel {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding: clamp(30px, 7vw, 92px);
+  background: var(--botanical-paper);
+  border-radius: 0 0 0 22%;
+  box-shadow: -24px 0 70px rgba(47, 85, 69, 0.11);
+}
+
+.welcome-panel::before,
+.welcome-panel::after {
+  position: absolute;
+  content: "";
+  width: 180px;
+  height: 180px;
+  border: 1px solid #a5bea9;
+  border-radius: 60% 40% 62% 38%;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+.welcome-panel::before {
+  top: 4%;
+  left: 4%;
+  transform: rotate(28deg);
+}
+
+.welcome-panel::after {
+  right: 4%;
+  bottom: 3%;
+  transform: rotate(-26deg);
+}
+
+.welcome-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: clamp(30px, 6vh, 70px);
+}
+
+.welcome-brand img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  padding: 8px;
+  background: #e5eee2;
+  border-radius: 50%;
+}
+
+.welcome-brand strong,
+.welcome-brand span {
+  display: block;
+}
+
+.welcome-brand strong {
+  font-size: clamp(18px, 2vw, 27px);
+  font-weight: 800;
+}
+
+.welcome-brand span {
+  margin-top: 4px;
+  color: #789084;
+  font-size: 12px;
+}
+
+.welcome-intro {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 28px;
+}
+
+.welcome-intro > span {
+  color: #6f9e7d;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.welcome-intro h1 {
+  margin: 5px 0;
+  color: var(--botanical-deep);
+  font-size: clamp(30px, 5vw, 54px);
+  line-height: 1.25;
+}
+
+.welcome-intro p {
+  max-width: 500px;
+  margin: 8px 0 0;
+  color: #718078;
+  font-size: 14px;
+}
+
+.entry-cards {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 600px;
+}
+
+.entry-card {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  min-height: 205px;
+  padding: 22px;
+  color: var(--botanical-ink);
+  text-align: right;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid #dfe6df;
+  border-radius: 26px 12px 26px 12px;
+  box-shadow: 0 13px 35px rgba(46, 84, 68, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.entry-card:hover,
+.entry-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 42px rgba(46, 84, 68, 0.16);
+}
+
+.entry-card-student {
+  color: white;
+  background: linear-gradient(145deg, #426d59, #284c3d);
+  border-color: #426d59;
+}
+
+.entry-card-icon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  margin-bottom: 25px;
+  color: var(--botanical-ink);
+  background: #edf1e9;
+  border-radius: 50%;
+}
+
+.entry-card-student .entry-card-icon {
+  color: white;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.entry-card strong,
+.entry-card small {
+  display: block;
+}
+
+.entry-card strong {
+  font-size: 23px;
+}
+
+.entry-card small {
+  margin-top: 4px;
+  color: #789084;
+  font-size: 13px;
+}
+
+.entry-card-student small {
+  color: #d0e4d5;
+}
+
+.entry-arrow {
+  position: absolute;
+  left: 20px;
+  bottom: 19px;
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  color: white;
+  background: var(--botanical-leaf);
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.entry-card:not(.entry-card-student) .entry-arrow {
+  color: var(--botanical-ink);
+  background: #e6e9e0;
+}
+
+.welcome-login {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 10px;
+  max-width: 600px;
+  margin-top: 24px;
+  padding: 20px;
+  background: #f2f5ef;
+  border: 1px solid #dce6dc;
+  border-radius: 18px;
+}
+
+.welcome-login-heading {
+  display: grid;
+  gap: 3px;
+  margin-bottom: 4px;
+}
+
+.welcome-login-heading strong {
+  font-size: 16px;
+}
+
+.welcome-login-heading span,
+.welcome-note {
+  color: #789084;
+  font-size: 11px;
+}
+
+.welcome-field {
+  display: grid;
+  gap: 6px;
+  color: var(--botanical-ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.welcome-field input {
+  min-height: 43px;
+  padding: 10px 12px;
+  color: var(--botanical-ink);
+  background: white;
+  border: 1px solid #d4dfd4;
+  border-radius: 10px;
+  outline: none;
+}
+
+.welcome-field input:focus {
+  border-color: #77ae85;
+  box-shadow: 0 0 0 3px #77ae8525;
+}
+
+.welcome-submit {
+  min-height: 44px;
+  margin-top: 4px;
+  color: white;
+  background: var(--botanical-deep);
+  border: 0;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.welcome-submit:hover {
+  background: #2d614c;
+}
+
+.welcome-error {
+  margin: 0;
+  padding: 8px 10px;
+  color: #9d3d3d;
+  background: #fbe9e7;
+  border-radius: 8px;
+  font-size: 11px;
+}
+
+.welcome-note {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.student-portal {
+  color: var(--botanical-ink);
+  background:
+    radial-gradient(circle at 8% 5%, #d7e5d4 0 11%, transparent 11.5%),
+    var(--botanical-cream);
+}
+
+.student-header {
+  color: var(--botanical-deep);
+}
+
+.student-brand-icon {
+  color: white;
+  background: var(--botanical-deep);
+  box-shadow: 0 10px 24px #2147382e;
+}
+
+.student-card,
+.student-results {
+  background: rgba(255, 255, 255, 0.84);
+  border-color: #dfe6df;
+  box-shadow: 0 20px 60px rgba(47, 85, 69, 0.1);
+}
+
+.student-card > h2,
+.student-results-heading h3 {
+  color: var(--botanical-deep);
+}
+
+.student-description,
+.student-header p,
+.student-footnote,
+.student-results-heading span {
+  color: #70867a;
+}
+
+.student-select-form .form-field > span {
+  color: var(--botanical-ink);
+}
+
+.student-select-form .form-field select {
+  color: var(--botanical-ink);
+  background: white;
+  border-color: #d7e2d7;
+}
+
+.student-submit,
+.student-print-button {
+  color: white;
+  background: var(--botanical-deep);
+  border-color: var(--botanical-deep);
+}
+
+.student-submit:hover,
+.student-print-button:hover {
+  background: #2d614c;
+}
+
+.student-schedule-wrap {
+  overflow-x: auto;
+  padding: 18px;
+}
+
+.student-schedule-grid {
+  display: grid;
+  grid-template-columns: 94px repeat(5, minmax(145px, 1fr));
+  min-width: 820px;
+  overflow: hidden;
+  direction: rtl;
+  border: 1px solid #dce5dc;
+  border-radius: 15px;
+  background: #fbfcfa;
+}
+
+.student-schedule-corner,
+.student-schedule-day {
+  display: grid;
+  place-items: center;
+  min-height: 54px;
+  padding: 8px;
+  color: white;
+  background: var(--botanical-deep);
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  font-weight: 800;
+}
+
+.student-schedule-time {
+  display: grid;
+  place-items: center;
+  min-height: 88px;
+  padding: 8px;
+  color: #536b5d;
+  background: #f2f6f0;
+  border-top: 1px solid #e1e8e0;
+  border-left: 1px solid #e1e8e0;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.student-schedule-cell {
+  min-height: 88px;
+  padding: 7px;
+  background: white;
+  border-top: 1px solid #e1e8e0;
+  border-left: 1px solid #e1e8e0;
+}
+
+.student-lecture-card {
+  display: grid;
+  gap: 3px;
+  min-height: 73px;
+  padding: 10px 9px;
+  color: #2d5544;
+  background: #e6f0e3;
+  border: 1px solid #c8ddc4;
+  border-radius: 11px;
+  box-shadow: 0 4px 10px rgba(47, 85, 69, 0.06);
+  text-align: center;
+}
+
+.student-lecture-card:nth-child(3n) {
+  background: #fdf0df;
+  border-color: #f2d8b4;
+}
+
+.student-lecture-card strong {
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.student-lecture-card span,
+.student-lecture-card small {
+  color: #6f8277;
+  font-size: 9px;
+}
+
+.student-back-button {
+  color: var(--botanical-ink);
+  border-color: #cddacf;
+}
+
+.student-back-button:hover {
+  color: var(--botanical-deep);
+  background: #e9f0e7;
+}
+
+@media (max-width: 760px) {
+  .welcome-screen {
+    display: block;
+    min-height: 100vh;
+  }
+
+  .welcome-photo {
+    min-height: 230px;
+    padding: 24px;
+  }
+
+  .welcome-panel {
+    min-height: auto;
+    padding: 30px 18px 42px;
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -14px 35px rgba(47, 85, 69, 0.12);
+  }
+
+  .welcome-brand {
+    margin-bottom: 30px;
+  }
+
+  .entry-cards {
+    gap: 10px;
+  }
+
+  .entry-card {
+    min-height: 175px;
+    padding: 16px;
+  }
+
+  .entry-card-icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 18px;
+  }
+
+  .entry-card strong {
+    font-size: 19px;
+  }
+
+  .entry-card small {
+    font-size: 11px;
+  }
+}
+
+@media print {
+  .student-schedule-wrap {
+    padding: 0;
+  }
+
+  .student-schedule-grid {
+    min-width: 0;
+    grid-template-columns: 72px repeat(5, 1fr);
+  }
+
+  .student-schedule-time,
+  .student-schedule-cell {
+    min-height: 68px;
+  }
+
+  .student-lecture-card {
+    min-height: 55px;
+    padding: 5px;
+    box-shadow: none;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
