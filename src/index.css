@@ -2274,3 +2274,122 @@ body {
     background: rgba(251, 250, 247, 0.97);
   }
 }
+
+
+/* Student timetable: days as rows, lecture times across */
+.student-schedule-desktop {
+  display: block;
+  overflow-x: auto;
+}
+
+.student-schedule-mobile {
+  display: none;
+}
+
+.student-schedule-grid {
+  grid-template-columns: 132px repeat(8, minmax(112px, 1fr));
+  min-width: 1030px;
+}
+
+.student-schedule-row-label {
+  min-height: 88px;
+  color: white;
+  background: #315c49;
+  border-top: 1px solid #e1e8e0;
+}
+
+@media (max-width: 760px) {
+  .student-schedule-wrap {
+    overflow: visible;
+    padding: 12px;
+  }
+
+  .student-schedule-desktop {
+    display: none;
+  }
+
+  .student-schedule-mobile {
+    display: grid;
+    gap: 12px;
+  }
+
+  .student-day-card {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #d8e4d8;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(47, 85, 69, 0.07);
+  }
+
+  .student-day-card > header {
+    padding: 11px 14px;
+    color: white;
+    background: #315c49;
+    font-size: 15px;
+    font-weight: 800;
+  }
+
+  .student-day-list {
+    display: grid;
+  }
+
+  .student-day-lecture {
+    display: grid;
+    grid-template-columns: minmax(112px, auto) 1fr;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 14px;
+    border-top: 1px solid #e5ece4;
+  }
+
+  .student-day-lecture time {
+    color: #39745a;
+    font-size: 11px;
+    font-weight: 800;
+    direction: rtl;
+  }
+
+  .student-day-lecture strong,
+  .student-day-lecture span {
+    display: block;
+  }
+
+  .student-day-lecture strong {
+    color: #2f5545;
+    font-size: 12px;
+  }
+
+  .student-day-lecture span {
+    margin-top: 3px;
+    color: #70867a;
+    font-size: 10px;
+  }
+
+  .student-day-empty {
+    margin: 0;
+    padding: 14px;
+    color: #8a9b8e;
+    font-size: 11px;
+  }
+}
+
+@media print {
+  .student-schedule-mobile {
+    display: none;
+  }
+
+  .student-schedule-desktop {
+    display: block;
+  }
+
+  .student-schedule-grid {
+    min-width: 0;
+    grid-template-columns: 82px repeat(8, 1fr);
+  }
+
+  .student-schedule-row-label,
+  .student-schedule-time,
+  .student-schedule-cell {
+    min-height: 68px;
+  }
+}
