@@ -166,6 +166,7 @@ function App() {
   const [form, setForm] = useState(EMPTY_FORM);
   const [editingId, setEditingId] = useState(null);
   const [showStudentPortal, setShowStudentPortal] = useState(false);
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [studentDepartment, setStudentDepartment] = useState(DEPARTMENTS[0]);
   const [studentYear, setStudentYear] = useState(STUDY_YEARS[0]);
   const [studentLectures, setStudentLectures] = useState([]);
@@ -488,7 +489,7 @@ function App() {
     return (
       <div className="app-shell student-portal" dir="rtl">
         <main className="student-main">
-          <header className="student-header"><div className="student-brand-icon"><GraduationCap size={28} /></div><div><h1>EduSchedule</h1><p>بوابة الطالب — جدول محاضراتك</p></div></header>
+          <header className="student-header"><div className="student-brand-icon"><img src={`${process.env.PUBLIC_URL}/college-logo.jpg`} alt="" /></div><div><h1>EduSchedule</h1><p>بوابة الطالب — جدول محاضراتك</p></div></header>
           <section className="student-card"><p className="eyebrow">بوابة الطلاب</p><h2>اعرف جدولك الدراسي</h2><p className="student-description">اختار القسم والفرقة علشان تعرض المحاضرات الخاصة بيك.</p>
             <form className="student-select-form" onSubmit={loadStudentSchedule}>
               <label className="form-field"><span>القسم</span><select value={studentDepartment} onChange={(e) => { setStudentDepartment(e.target.value); setStudentSearched(false); }}>{DEPARTMENTS.map((department) => <option key={department} value={department}>{department}</option>)}</select></label>
@@ -542,7 +543,7 @@ function App() {
         </div>
         <main className="welcome-panel">
           <header className="welcome-brand">
-            <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="" />
+            <img src={`${process.env.PUBLIC_URL}/college-logo.jpg`} alt="" />
             <div>
               <strong>كلية التربية النوعية</strong>
               <span>نظام جدول المحاضرات</span>
@@ -560,14 +561,14 @@ function App() {
               <small>تصفح الجداول</small>
               <span className="entry-arrow">←</span>
             </button>
-            <button className="entry-card" type="button" onClick={() => document.querySelector(".welcome-login")?.scrollIntoView({ behavior: "smooth" })}>
+            <button className="entry-card" type="button" onClick={() => setShowAdminLogin(true)}>
               <span className="entry-card-icon"><Users size={31} /></span>
               <strong>مسؤول</strong>
               <small>تسجيل الدخول</small>
               <span className="entry-arrow">←</span>
             </button>
           </div>
-          <form className="welcome-login" onSubmit={signIn}>
+          {showAdminLogin && <form className="welcome-login" onSubmit={signIn}>
             <div className="welcome-login-heading">
               <strong>دخول المسؤول</strong>
               <span>لإدارة الجداول والمحاضرات</span>
@@ -577,7 +578,8 @@ function App() {
             <label className="welcome-field"><span>كلمة المرور</span><input type="password" required autoComplete="current-password" value={authPassword} onChange={(e) => setAuthPassword(e.target.value)} placeholder="••••••••" /></label>
             <button type="submit" disabled={authBusy} className="welcome-submit">{authBusy ? "جارٍ تسجيل الدخول..." : "تسجيل الدخول"}</button>
             <p className="welcome-note">يجب إنشاء حساب المدير من لوحة Supabase أولًا.</p>
-          </form>
+            <button type="button" className="welcome-login-close" onClick={() => setShowAdminLogin(false)}>العودة لاختيار الدخول</button>
+          </form>}
         </main>
       </div>
     );
