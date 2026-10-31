@@ -44,7 +44,8 @@ const DEPARTMENTS = [
 
 const HALLS = ["مدرج 1", "مدرج 2", "مدرج 3", "مدرج 4"];
 const STUDY_YEARS = ["الأولى", "الثانية", "الثالثة", "الرابعة"];
-const SCHEDULE_DAYS = DAYS.slice(0, 5);\nconst SCHEDULE_SLOTS = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"];
+const SCHEDULE_DAYS = DAYS.slice(0, 5);
+const SCHEDULE_SLOTS = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"];
 
 const INITIAL_LECTURES = [
   {
