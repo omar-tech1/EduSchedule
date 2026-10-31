@@ -1978,3 +1978,299 @@ body {
     background-position: 58% center;
   }
 }
+
+
+/* Final botanical identity pass */
+.welcome-photo-shape,
+.welcome-panel::before,
+.welcome-panel::after {
+  display: none !important;
+}
+
+.app-shell:not(.student-portal) {
+  --bg: #f1eee4;
+  --sidebar: #214738;
+  --surface: #fffdf8;
+  --surface-hover: #e6f0e5;
+  --border: #d7e2d8;
+  --text: #264a3a;
+  --muted: #70867a;
+  --primary: #39745a;
+  --primary-hover: #2b5c47;
+  --danger: #a95249;
+  --success: #4f9a6a;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.app-shell:not(.student-portal) .sidebar {
+  background: var(--sidebar);
+  border-left-color: #4b7562;
+  box-shadow: -12px 0 36px rgba(33, 71, 56, 0.12);
+}
+
+.app-shell:not(.student-portal) .brand-icon,
+.app-shell:not(.student-portal) .user-avatar {
+  background: linear-gradient(135deg, #6fbd87, #2d654d);
+  box-shadow: 0 8px 24px #21473838;
+}
+
+.app-shell:not(.student-portal) .sidebar-label {
+  color: #b8d0bd;
+}
+
+.app-shell:not(.student-portal) .nav-item {
+  color: #d1e1d3;
+}
+
+.app-shell:not(.student-portal) .nav-item:hover {
+  color: white;
+  background: #ffffff14;
+}
+
+.app-shell:not(.student-portal) .nav-item.active {
+  color: #f5fff6;
+  background: #6fbd8730;
+  border-color: #8dcc9b66;
+}
+
+.app-shell:not(.student-portal) .nav-item.active svg {
+  color: #a9e0b1;
+}
+
+.app-shell:not(.student-portal) .sidebar-bottom {
+  color: #edf8ee;
+  background: linear-gradient(145deg, #315c49, #254b3c);
+  border-color: #6e9b7c66;
+}
+
+.app-shell:not(.student-portal) .sidebar-bottom p {
+  color: #c1d8c5;
+}
+
+.app-shell:not(.student-portal) .sidebar-help-icon {
+  color: #d9f1dc;
+  background: #6fbd8730;
+}
+
+.app-shell:not(.student-portal) .main-content {
+  background: var(--bg);
+}
+
+.app-shell:not(.student-portal) .topbar {
+  color: var(--text);
+  background: rgba(251, 250, 247, 0.93);
+  border-bottom-color: var(--border);
+  box-shadow: 0 5px 22px rgba(33, 71, 56, 0.05);
+}
+
+.app-shell:not(.student-portal) .breadcrumb,
+.app-shell:not(.student-portal) .user-info span {
+  color: var(--muted);
+}
+
+.app-shell:not(.student-portal) .welcome-section h2,
+.app-shell:not(.student-portal) .topbar h1 {
+  color: var(--botanical-deep);
+}
+
+.app-shell:not(.student-portal) .eyebrow {
+  color: #5b956e;
+}
+
+.app-shell:not(.student-portal) .stat-card,
+.app-shell:not(.student-portal) .schedule-section {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 16px 42px rgba(47, 85, 69, 0.07);
+}
+
+.app-shell:not(.student-portal) .stat-card:hover {
+  border-color: #9fbea5;
+}
+
+.app-shell:not(.student-portal) .stat-icon.purple,
+.app-shell:not(.student-portal) .stat-icon.blue {
+  color: #39745a;
+  background: #dcecdf;
+}
+
+.app-shell:not(.student-portal) .stat-icon.green {
+  color: #4b8d61;
+  background: #e1f0e2;
+}
+
+.app-shell:not(.student-portal) .stat-icon.orange {
+  color: #9b7950;
+  background: #f5ead8;
+}
+
+.app-shell:not(.student-portal) .stat-text span,
+.app-shell:not(.student-portal) .stat-text small {
+  color: var(--muted);
+}
+
+.app-shell:not(.student-portal) .stat-text strong {
+  color: var(--botanical-deep);
+}
+
+.app-shell:not(.student-portal) .section-heading,
+.app-shell:not(.student-portal) .filters-row,
+.app-shell:not(.student-portal) .table-footer {
+  border-color: var(--border);
+}
+
+.app-shell:not(.student-portal) .section-heading h2,
+.app-shell:not(.student-portal) .section-heading h2 svg {
+  color: var(--botanical-deep);
+}
+
+.app-shell:not(.student-portal) .section-heading p,
+.app-shell:not(.student-portal) .table-footer {
+  color: var(--muted);
+}
+
+.app-shell:not(.student-portal) .secondary-button {
+  color: var(--botanical-deep);
+  background: #f7faf5;
+  border-color: #bcd1bf;
+}
+
+.app-shell:not(.student-portal) .secondary-button:hover {
+  color: var(--botanical-deep);
+  background: #e7f1e6;
+}
+
+.app-shell:not(.student-portal) .primary-button {
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 6px 18px #39745a2b;
+}
+
+.app-shell:not(.student-portal) .primary-button:hover {
+  background: var(--primary-hover);
+}
+
+.app-shell:not(.student-portal) .search-box,
+.app-shell:not(.student-portal) .filters-row > select,
+.app-shell:not(.student-portal) .form-field input,
+.app-shell:not(.student-portal) .form-field select {
+  color: var(--text);
+  background: #f8faf6;
+  border-color: #cbdccc;
+}
+
+.app-shell:not(.student-portal) .search-box:focus-within,
+.app-shell:not(.student-portal) .form-field input:focus,
+.app-shell:not(.student-portal) .form-field select:focus {
+  border-color: #6fa981;
+}
+
+.app-shell:not(.student-portal) .lectures-table thead {
+  background: #315c49;
+}
+
+.app-shell:not(.student-portal) .lectures-table th {
+  color: #eef8ef;
+}
+
+.app-shell:not(.student-portal) .lectures-table td {
+  color: #466655;
+  border-top-color: #e1e9e0;
+}
+
+.app-shell:not(.student-portal) .lectures-table tbody tr:hover {
+  background: #eaf3e9;
+}
+
+.app-shell:not(.student-portal) .lecture-name strong {
+  color: var(--botanical-deep);
+}
+
+.app-shell:not(.student-portal) .lecture-dot {
+  background: #6fbd87;
+  box-shadow: 0 0 10px #6fbd8755;
+}
+
+.app-shell:not(.student-portal) .department-badge {
+  color: #39745a;
+  background: #e7f1e6;
+  border-color: #bcd7be;
+}
+
+.app-shell:not(.student-portal) .hall-cell svg,
+.app-shell:not(.student-portal) .time-cell svg {
+  color: #5c9870;
+}
+
+.app-shell:not(.student-portal) .icon-button {
+  color: #6d8778;
+}
+
+.app-shell:not(.student-portal) .icon-button:hover {
+  color: var(--botanical-deep);
+  background: #e7f1e6;
+  border-color: #c5d8c7;
+}
+
+.app-shell:not(.student-portal) .edit-action:hover {
+  color: #39745a;
+  background: #e1f0e2;
+  border-color: #a9c9ad;
+}
+
+.app-shell:not(.student-portal) .delete-action:hover {
+  color: #a95249;
+  background: #f8e8e3;
+  border-color: #e4b9ae;
+}
+
+.app-shell:not(.student-portal) .status-dot {
+  background: #6fbd87;
+  box-shadow: 0 0 9px #6fbd8755;
+}
+
+.app-shell:not(.student-portal) .lecture-modal {
+  color: var(--text);
+  background: #fffdf8;
+  border-color: var(--border);
+  box-shadow: 0 25px 80px #21473835;
+}
+
+.app-shell:not(.student-portal) .modal-header,
+.app-shell:not(.student-portal) .modal-actions {
+  border-color: var(--border);
+}
+
+.app-shell:not(.student-portal) .modal-header h2,
+.app-shell:not(.student-portal) .form-field > span {
+  color: var(--botanical-deep);
+}
+
+.app-shell:not(.student-portal) .modal-header p,
+.app-shell:not(.student-portal) .form-note {
+  color: var(--muted);
+}
+
+.app-shell:not(.student-portal) .form-note {
+  background: #edf5eb;
+  border-color: #c9ddca;
+}
+
+.app-shell:not(.student-portal) .notice.success {
+  color: #2e7048;
+  background: #e7f4e8;
+  border-color: #abd1b1;
+}
+
+.app-shell:not(.student-portal) .notice.error {
+  color: #94483f;
+  background: #faece8;
+  border-color: #e3b6ad;
+}
+
+@media (max-width: 760px) {
+  .app-shell:not(.student-portal) .topbar {
+    background: rgba(251, 250, 247, 0.97);
+  }
+}
