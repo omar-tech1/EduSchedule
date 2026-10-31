@@ -44,8 +44,8 @@ const DEPARTMENTS = [
 
 const HALLS = ["مدرج 1", "مدرج 2", "مدرج 3", "مدرج 4"];
 const STUDY_YEARS = ["الأولى", "الثانية", "الثالثة", "الرابعة"];
-const SCHEDULE_DAYS = DAYS.slice(0, 5);
-const SCHEDULE_SLOTS = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+const SCHEDULE_DAYS = DAYS.filter((day) => day !== "الجمعة");
+const SCHEDULE_SLOTS = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
 
 const INITIAL_LECTURES = [
   {
@@ -864,103 +864,61 @@ function App() {
               </select>
             </div>
 
-            <div className="table-container">
-              <table className="lectures-table">
-                <thead>
-                  <tr>
-                    <th>المحاضرة</th>
-                    <th>الدكتور</th>
-                    <th>القسم</th>
-                    <th>المدرج</th>
-                    <th>اليوم</th>
-                    <th>التوقيت</th>
-                    <th>الإجراءات</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {filteredLectures.map((lecture) => (
-                    <tr key={lecture.id}>
-                      <td>
-                        <div className="lecture-name">
-                          <span className="lecture-dot" />
-                          <strong>{lecture.name}</strong>
+            {filteredLectures.length ? (
+              <div className="admin-schedule-view">
+                <div className="admin-schedule-desktop">
+                  <div className="admin-schedule-grid">
+                    <div className="admin-schedule-corner">اليوم / الوقت</div>
+                    {SCHEDULE_SLOTS.map((slot) => <div className="admin-schedule-header" key={slot}>{formatTime(slot)}</div>)}
+                    {SCHEDULE_DAYS.map((day) => (
+                      <Fragment key={day}>
+                        <div className="admin-schedule-day-label">{day}</div>
+                        {SCHEDULE_SLOTS.map((slot) => {
+                          const dayLectures = filteredLectures.filter((item) => item.day === day && item.startTime === slot);
+                          return (
+                            <div className="admin-schedule-cell" key={day + slot}>
+                              {dayLectures.map((lecture) => (
+                                <article className="admin-lecture-card" key={lecture.id}>
+                                  <strong>{lecture.name}</strong>
+                                  <span>{lecture.doctor || "عضو هيئة التدريس"}</span>
+                                  <small>{lecture.hall}</small>
+                                  <div className="admin-lecture-actions">
+                                    <button className="icon-button edit-action" onClick={() => editLecture(lecture)} title="تعديل المحاضرة" aria-label={\`تعديل \${lecture.name}\`}><Pencil size={14} /></button>
+                                    <button className="icon-button delete-action" onClick={() => deleteLecture(lecture.id)} title="حذف المحاضرة" aria-label={\`حذف \${lecture.name}\`}><Trash2 size={14} /></button>
+                                  </div>
+                                </article>
+                              ))}
+                            </div>
+                          );
+                        })}
+                      </Fragment>
+                    ))}
+                  </div>
+                </div>
+                <div className="admin-schedule-mobile">
+                  {SCHEDULE_DAYS.map((day) => {
+                    const dayLectures = filteredLectures.filter((item) => item.day === day);
+                    return (
+                      <article className="admin-day-card" key={day}>
+                        <header>{day}</header>
+                        <div className="admin-day-list">
+                          {dayLectures.map((lecture) => (
+                            <div className="admin-day-lecture" key={lecture.id}>
+                              <time>{formatTime(lecture.startTime)} – {formatTime(lecture.endTime)}</time>
+                              <div><strong>{lecture.name}</strong><span>{lecture.doctor || "عضو هيئة التدريس"} · {lecture.hall}</span></div>
+                              <div className="admin-lecture-actions">
+                                <button className="icon-button edit-action" onClick={() => editLecture(lecture)} title="تعديل المحاضرة" aria-label={\`تعديل \${lecture.name}\`}><Pencil size={14} /></button>
+                                <button className="icon-button delete-action" onClick={() => deleteLecture(lecture.id)} title="حذف المحاضرة" aria-label={\`حذف \${lecture.name}\`}><Trash2 size={14} /></button>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                      </td>
-
-                      <td>{lecture.doctor}</td>
-
-                      <td>
-                        <span className="department-badge">
-                          {lecture.department}
-                        </span>
-                      </td>
-
-                      <td>
-                        <span className="hall-cell">
-                          <MapPin size={15} />
-                          {lecture.hall}
-                        </span>
-                      </td>
-
-                      <td>{lecture.day}</td>
-
-                      <td>
-                        <span className="time-cell">
-                          <Clock size={15} />
-                          {formatTime(lecture.startTime)} –{" "}
-                          {formatTime(lecture.endTime)}
-                        </span>
-                      </td>
-
-                      <td>
-                        <div className="row-actions">
-                          <button
-                            className="icon-button edit-action"
-                            onClick={() => editLecture(lecture)}
-                            title="تعديل المحاضرة"
-                            aria-label={`تعديل ${lecture.name}`}
-                          >
-                            <Pencil size={17} />
-                          </button>
-
-                          <button
-                            className="icon-button delete-action"
-                            onClick={() => deleteLecture(lecture.id)}
-                            title="حذف المحاضرة"
-                            aria-label={`حذف ${lecture.name}`}
-                          >
-                            <Trash2 size={17} />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-
-                  {filteredLectures.length === 0 && (
-                    <tr>
-                      <td colSpan={7}>
-                        <div className="empty-state">
-                          <Search size={30} />
-                          <strong>مفيش محاضرات مطابقة</strong>
-                          <p>جرّب تغيّر كلمات البحث أو الفلاتر.</p>
-                          <button
-                            className="secondary-button"
-                            onClick={() => {
-                              setSearch("");
-                              setDepartmentFilter("الكل");
-                              setDayFilter("الكل");
-                            }}
-                          >
-                            مسح الفلاتر
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : <div className="empty-state"><Search size={30} /><strong>مفيش محاضرات مطابقة</strong><p>جرّب تغيّر كلمات البحث أو الفلاتر.</p><button className="secondary-button" onClick={() => { setSearch(""); setDepartmentFilter("الكل"); setDayFilter("الكل"); }}>مسح الفلاتر</button></div>}
 
             <footer className="table-footer">
               <span>
