@@ -500,29 +500,46 @@ function App() {
             {studentSearched && !studentLoading && !studentError && <section className="student-results"><div className="student-results-heading"><div><h3>جدول {studentDepartment} — الفرقة {studentYear}</h3><span>{studentLectures.length} محاضرة</span></div>{studentLectures.length > 0 && <button className="primary-button student-print-button" type="button" onClick={() => window.print()}><Printer size={17} /> طباعة الجدول</button>}</div>
               {studentLectures.length ? (
                 <div className="student-schedule-wrap">
-                  <div className="student-schedule-grid">
-                    <div className="student-schedule-corner">الوقت</div>
-                    {SCHEDULE_DAYS.map((day) => <div className="student-schedule-day" key={day}>{day}</div>)}
-                    {SCHEDULE_SLOTS.map((slot) => (
-                      <Fragment key={slot}>
-                        <div className="student-schedule-time">{formatTime(slot)}</div>
-                        {SCHEDULE_DAYS.map((day) => {
-                          const lecture = studentLectures.find((item) => item.day === day && item.startTime === slot);
-                          return (
-                            <div className="student-schedule-cell" key={day + slot}>
-                              {lecture && <article className="student-lecture-card">
-                                <strong>{lecture.name}</strong>
-                                <span>{lecture.doctor || "عضو هيئة التدريس"}</span>
-                                <small>{lecture.hall}</small>
-                              </article>}
-                            </div>
-                          );
-                        })}
-                      </Fragment>
-                    ))}
+                  <div className="student-schedule-desktop">
+                    <div className="student-schedule-grid">
+                      <div className="student-schedule-corner">اليوم / الوقت</div>
+                      {SCHEDULE_SLOTS.map((slot) => <div className="student-schedule-day" key={slot}>{formatTime(slot)}</div>)}
+                      {SCHEDULE_DAYS.map((day) => (
+                        <Fragment key={day}>
+                          <div className="student-schedule-day student-schedule-row-label">{day}</div>
+                          {SCHEDULE_SLOTS.map((slot) => {
+                            const lecture = studentLectures.find((item) => item.day === day && item.startTime === slot);
+                            return (
+                              <div className="student-schedule-cell" key={day + slot}>
+                                {lecture && <article className="student-lecture-card">
+                                  <strong>{lecture.name}</strong>
+                                  <span>{lecture.doctor || "عضو هيئة التدريس"}</span>
+                                  <small>{lecture.hall}</small>
+                                </article>}
+                              </div>
+                            );
+                          })}
+                        </Fragment>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ) : <div className="empty-state"><CalendarDays size={30} /><strong>لسه مفيش جدول للفرقة دي</strong><p>المسؤول لسه ما أضافش محاضرات للفرقة دي.</p></div>}
+                  <div className="student-schedule-mobile">
+                    {SCHEDULE_DAYS.map((day) => {
+                      const dayLectures = studentLectures.filter((item) => item.day === day);
+                      return (
+                        <article className="student-day-card" key={day}>
+                          <header>{day}</header>
+                          {dayLectures.length ? <div className="student-day-list">
+                            {dayLectures.map((lecture) => <div className="student-day-lecture" key={lecture.id}>
+                              <time>{formatTime(lecture.startTime)} – {formatTime(lecture.endTime)}</time>
+                              <div><strong>{lecture.name}</strong><span>{lecture.doctor || "عضو هيئة التدريس"} · {lecture.hall}</span></div>
+                            </div>)}
+                          </div> : <p className="student-day-empty">لا توجد محاضرات</p>}
+                        </article>
+                      );
+                    })}
+                  </div>
+                </div>              ) : <div className="empty-state"><CalendarDays size={30} /><strong>لسه مفيش جدول للفرقة دي</strong><p>المسؤول لسه ما أضافش محاضرات للفرقة دي.</p></div>}
             </section>}
             <button className="student-back-button" type="button" onClick={() => { setShowStudentPortal(false); setStudentSearched(false); setStudentError(""); }}>العودة لتسجيل دخول المسؤول</button>
           </section><p className="student-footnote">EduSchedule · نظام الجدولة الجامعية</p>
