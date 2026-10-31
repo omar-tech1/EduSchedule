@@ -2507,3 +2507,231 @@ body {
     font-size: 6px !important;
   }
 }
+
+
+/* Shared timetable grid for administrators and students */
+.student-schedule-grid {
+  grid-template-columns: 88px repeat(11, minmax(0, 1fr));
+}
+
+.admin-schedule-view {
+  width: 100%;
+  overflow: visible;
+  padding: 18px;
+}
+
+.admin-schedule-desktop {
+  width: 100%;
+  overflow: visible;
+}
+
+.admin-schedule-mobile {
+  display: none;
+}
+
+.admin-schedule-grid {
+  display: grid;
+  grid-template-columns: 88px repeat(11, minmax(0, 1fr));
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  direction: rtl;
+  border: 1px solid #dce5dc;
+  border-radius: 15px;
+  background: #fbfcfa;
+}
+
+.admin-schedule-corner,
+.admin-schedule-header {
+  display: grid;
+  place-items: center;
+  min-height: 52px;
+  padding: 5px 3px;
+  color: white;
+  background: #315c49;
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  font-size: 10px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.admin-schedule-day-label {
+  display: grid;
+  place-items: center;
+  min-height: 88px;
+  padding: 6px 3px;
+  color: white;
+  background: #315c49;
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  border-left: 1px solid rgba(255, 255, 255, 0.28);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.admin-schedule-cell {
+  min-width: 0;
+  min-height: 88px;
+  padding: 4px;
+  background: white;
+  border-top: 1px solid #e1e8e0;
+  border-left: 1px solid #e1e8e0;
+}
+
+.admin-lecture-card {
+  display: grid;
+  gap: 2px;
+  min-height: 78px;
+  padding: 6px 4px;
+  color: #2d5544;
+  background: #e6f0e3;
+  border: 1px solid #c8ddc4;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.admin-lecture-card:nth-child(3n) {
+  background: #fdf0df;
+  border-color: #f2d8b4;
+}
+
+.admin-lecture-card strong {
+  overflow: hidden;
+  font-size: 10px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+}
+
+.admin-lecture-card span,
+.admin-lecture-card small {
+  overflow: hidden;
+  color: #6f8277;
+  font-size: 8px;
+  text-overflow: ellipsis;
+}
+
+.admin-lecture-actions {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.admin-lecture-actions .icon-button {
+  width: 23px;
+  height: 23px;
+}
+
+@media (max-width: 760px) {
+  .admin-schedule-view {
+    padding: 12px;
+  }
+
+  .admin-schedule-desktop {
+    display: none;
+  }
+
+  .admin-schedule-mobile {
+    display: grid;
+    gap: 12px;
+  }
+
+  .admin-day-card {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #d8e4d8;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(47, 85, 69, 0.07);
+  }
+
+  .admin-day-card > header {
+    padding: 11px 14px;
+    color: white;
+    background: #315c49;
+    font-size: 15px;
+    font-weight: 800;
+  }
+
+  .admin-day-list {
+    display: grid;
+  }
+
+  .admin-day-lecture {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr) auto;
+    gap: 8px;
+    align-items: center;
+    padding: 11px 12px;
+    border-top: 1px solid #e5ece4;
+  }
+
+  .admin-day-lecture time {
+    color: #39745a;
+    font-size: 10px;
+    font-weight: 800;
+  }
+
+  .admin-day-lecture strong,
+  .admin-day-lecture span {
+    display: block;
+  }
+
+  .admin-day-lecture strong {
+    color: #2f5545;
+    font-size: 11px;
+  }
+
+  .admin-day-lecture span {
+    margin-top: 3px;
+    color: #70867a;
+    font-size: 9px;
+  }
+}
+
+@media print {
+  .admin-schedule-view {
+    padding: 0;
+  }
+
+  .admin-schedule-desktop {
+    display: block;
+  }
+
+  .admin-schedule-mobile {
+    display: none;
+  }
+
+  .admin-schedule-grid {
+    grid-template-columns: 58px repeat(11, minmax(0, 1fr));
+    width: 100%;
+    min-width: 0;
+  }
+
+  .admin-schedule-corner,
+  .admin-schedule-header,
+  .admin-schedule-day-label {
+    min-height: 28px;
+    padding: 3px 1px;
+    font-size: 7px;
+  }
+
+  .admin-schedule-cell {
+    min-height: 43px;
+    padding: 2px;
+  }
+
+  .admin-lecture-card {
+    min-height: 37px;
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 6px;
+  }
+
+  .admin-lecture-card strong {
+    font-size: 6px;
+  }
+
+  .admin-lecture-card span,
+  .admin-lecture-card small,
+  .admin-lecture-actions {
+    display: none;
+  }
+}
