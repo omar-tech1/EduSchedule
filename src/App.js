@@ -883,8 +883,8 @@ function App() {
                                   <span>{lecture.doctor || "عضو هيئة التدريس"}</span>
                                   <small>{lecture.hall}</small>
                                   <div className="admin-lecture-actions">
-                                    <button className="icon-button edit-action" onClick={() => editLecture(lecture)} title="تعديل المحاضرة" aria-label={\`تعديل \${lecture.name}\`}><Pencil size={14} /></button>
-                                    <button className="icon-button delete-action" onClick={() => deleteLecture(lecture.id)} title="حذف المحاضرة" aria-label={\`حذف \${lecture.name}\`}><Trash2 size={14} /></button>
+                                    <button className="icon-button edit-action" onClick={() => editLecture(lecture)} title="تعديل المحاضرة" aria-label={`تعديل ${lecture.name}`}><Pencil size={14} /></button>
+                                    <button className="icon-button delete-action" onClick={() => deleteLecture(lecture.id)} title="حذف المحاضرة" aria-label={`حذف ${lecture.name}`}><Trash2 size={14} /></button>
                                   </div>
                                 </article>
                               ))}
@@ -907,8 +907,8 @@ function App() {
                               <time>{formatTime(lecture.startTime)} – {formatTime(lecture.endTime)}</time>
                               <div><strong>{lecture.name}</strong><span>{lecture.doctor || "عضو هيئة التدريس"} · {lecture.hall}</span></div>
                               <div className="admin-lecture-actions">
-                                <button className="icon-button edit-action" onClick={() => editLecture(lecture)} title="تعديل المحاضرة" aria-label={\`تعديل \${lecture.name}\`}><Pencil size={14} /></button>
-                                <button className="icon-button delete-action" onClick={() => deleteLecture(lecture.id)} title="حذف المحاضرة" aria-label={\`حذف \${lecture.name}\`}><Trash2 size={14} /></button>
+                                <button className="icon-button edit-action" onClick={() => editLecture(lecture)} title="تعديل المحاضرة" aria-label={`تعديل ${lecture.name}`}><Pencil size={14} /></button>
+                                <button className="icon-button delete-action" onClick={() => deleteLecture(lecture.id)} title="حذف المحاضرة" aria-label={`حذف ${lecture.name}`}><Trash2 size={14} /></button>
                               </div>
                             </div>
                           ))}
