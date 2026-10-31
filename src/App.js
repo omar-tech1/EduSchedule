@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import {
   LayoutDashboard,
@@ -43,7 +43,7 @@ const DEPARTMENTS = [
 ];
 
 const HALLS = ["مدرج 1", "مدرج 2", "مدرج 3", "مدرج 4"];
-const STUDY_YEARS = ["الأولى", "الثانية", "الثالثة", "الرابعة"];
+const STUDY_YEARS = ["الأولى", "الثانية", "الثالثة", "الرابعة"];\nconst SCHEDULE_DAYS = DAYS.slice(0, 5);\nconst SCHEDULE_SLOTS = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"];
 
 const INITIAL_LECTURES = [
   {
@@ -495,7 +495,31 @@ function App() {
             </form>
             {studentError && <div className="notice error" role="alert">{studentError}</div>}
             {studentSearched && !studentLoading && !studentError && <section className="student-results"><div className="student-results-heading"><div><h3>جدول {studentDepartment} — الفرقة {studentYear}</h3><span>{studentLectures.length} محاضرة</span></div>{studentLectures.length > 0 && <button className="primary-button student-print-button" type="button" onClick={() => window.print()}><Printer size={17} /> طباعة الجدول</button>}</div>
-              {studentLectures.length ? <div className="table-container"><table className="lectures-table student-table"><thead><tr><th>المادة</th><th>الدكتور</th><th>اليوم</th><th>التوقيت</th><th>المدرج</th></tr></thead><tbody>{studentLectures.map((lecture) => <tr key={lecture.id}><td data-label="المادة"><strong>{lecture.name}</strong></td><td data-label="الدكتور">{lecture.doctor || "—"}</td><td data-label="اليوم">{lecture.day}</td><td data-label="التوقيت">{formatTime(lecture.startTime)} – {formatTime(lecture.endTime)}</td><td data-label="المدرج"><span className="hall-cell"><MapPin size={15} />{lecture.hall}</span></td></tr>)}</tbody></table></div> : <div className="empty-state"><CalendarDays size={30} /><strong>لسه مفيش جدول للفرقة دي</strong><p>المسؤول لسه ما أضافش محاضرات للفرقة دي.</p></div>}
+              {studentLectures.length ? (
+                <div className="student-schedule-wrap">
+                  <div className="student-schedule-grid">
+                    <div className="student-schedule-corner">الوقت</div>
+                    {SCHEDULE_DAYS.map((day) => <div className="student-schedule-day" key={day}>{day}</div>)}
+                    {SCHEDULE_SLOTS.map((slot) => (
+                      <Fragment key={slot}>
+                        <div className="student-schedule-time">{formatTime(slot)}</div>
+                        {SCHEDULE_DAYS.map((day) => {
+                          const lecture = studentLectures.find((item) => item.day === day && item.startTime === slot);
+                          return (
+                            <div className="student-schedule-cell" key={day + slot}>
+                              {lecture && <article className="student-lecture-card">
+                                <strong>{lecture.name}</strong>
+                                <span>{lecture.doctor || "عضو هيئة التدريس"}</span>
+                                <small>{lecture.hall}</small>
+                              </article>}
+                            </div>
+                          );
+                        })}
+                      </Fragment>
+                    ))}
+                  </div>
+                </div>
+              ) : <div className="empty-state"><CalendarDays size={30} /><strong>لسه مفيش جدول للفرقة دي</strong><p>المسؤول لسه ما أضافش محاضرات للفرقة دي.</p></div>}
             </section>}
             <button className="student-back-button" type="button" onClick={() => { setShowStudentPortal(false); setStudentSearched(false); setStudentError(""); }}>العودة لتسجيل دخول المسؤول</button>
           </section><p className="student-footnote">EduSchedule · نظام الجدولة الجامعية</p>
@@ -506,20 +530,53 @@ function App() {
 
   if (!session) {
     return (
-      <div className="app-shell" dir="rtl" style={{ minHeight: "100vh", display: "grid", placeItems: "center", padding: 24 }}>
-        <form onSubmit={signIn} style={{ width: "min(420px, 100%)", padding: 28, background: "#0E131B", border: "1px solid #252C36", borderRadius: 16, boxShadow: "0 24px 70px #0008" }}>
-          <div style={{ color: "#EF1D2A", fontSize: 32, textAlign: "center" }}><GraduationCap size={36} /></div>
-          <h1 style={{ textAlign: "center", margin: "8px 0" }}>University Schedule</h1>
-          <p style={{ textAlign: "center", opacity: .75, marginBottom: 24 }}>سجّل الدخول لإدارة جدول المحاضرات</p>
-          {notice && <p role="alert" style={{ color: "#ff6872" }}>{notice.message}</p>}
-          <label style={{ display: "block", marginBottom: 8 }}>البريد الإلكتروني</label>
-          <input type="email" required autoComplete="username" value={authEmail} onChange={e => setAuthEmail(e.target.value)} placeholder="admin@university.edu" style={{ width: "100%", boxSizing: "border-box", marginBottom: 16, padding: 12, borderRadius: 8, background: "#080B10", color: "white", border: "1px solid #252C36" }} />
-          <label style={{ display: "block", marginBottom: 8 }}>كلمة المرور</label>
-          <input type="password" required autoComplete="current-password" value={authPassword} onChange={e => setAuthPassword(e.target.value)} placeholder="••••••••" style={{ width: "100%", boxSizing: "border-box", marginBottom: 20, padding: 12, borderRadius: 8, background: "#080B10", color: "white", border: "1px solid #252C36" }} />
-          <button type="submit" disabled={authBusy} className="primary-button" style={{ width: "100%", justifyContent: "center" }}>{authBusy ? "جارٍ تسجيل الدخول..." : "تسجيل الدخول"}</button>
-          <p style={{ fontSize: 12, opacity: .65, marginTop: 16, lineHeight: 1.8 }}>يجب إنشاء حساب المدير من Supabase Dashboard → Authentication → Users أولًا.</p>
-          <button type="button" className="student-entry-button" onClick={() => setShowStudentPortal(true)}><GraduationCap size={18} /> أنا طالب — عرض الجدول</button>
-        </form>
+      <div className="welcome-screen" dir="rtl">
+        <div className="welcome-photo" aria-hidden="true">
+          <div className="welcome-photo-shape" />
+          <div className="welcome-photo-copy">
+            <span>كلية التربية النوعية</span>
+            <small>FACULTY OF SPECIFIC EDUCATION</small>
+          </div>
+        </div>
+        <main className="welcome-panel">
+          <header className="welcome-brand">
+            <img src={\${process.env.PUBLIC_URL}/logo192.png} alt="" />
+            <div>
+              <strong>كلية التربية النوعية</strong>
+              <span>نظام جدول المحاضرات</span>
+            </div>
+          </header>
+          <div className="welcome-intro">
+            <span>أهلاً بك</span>
+            <h1>اختر طريقة الدخول</h1>
+            <p>اعرض جدولك الدراسي أو سجّل الدخول لإدارة المحاضرات.</p>
+          </div>
+          <div className="entry-cards">
+            <button className="entry-card entry-card-student" type="button" onClick={() => setShowStudentPortal(true)}>
+              <span className="entry-card-icon"><GraduationCap size={34} /></span>
+              <strong>طالب</strong>
+              <small>تصفح الجداول</small>
+              <span className="entry-arrow">←</span>
+            </button>
+            <button className="entry-card" type="button" onClick={() => document.querySelector(".welcome-login")?.scrollIntoView({ behavior: "smooth" })}>
+              <span className="entry-card-icon"><Users size={31} /></span>
+              <strong>مسؤول</strong>
+              <small>تسجيل الدخول</small>
+              <span className="entry-arrow">←</span>
+            </button>
+          </div>
+          <form className="welcome-login" onSubmit={signIn}>
+            <div className="welcome-login-heading">
+              <strong>دخول المسؤول</strong>
+              <span>لإدارة الجداول والمحاضرات</span>
+            </div>
+            {notice && <p className="welcome-error" role="alert">{notice.message}</p>}
+            <label className="welcome-field"><span>البريد الإلكتروني</span><input type="email" required autoComplete="username" value={authEmail} onChange={(e) => setAuthEmail(e.target.value)} placeholder="admin@university.edu" /></label>
+            <label className="welcome-field"><span>كلمة المرور</span><input type="password" required autoComplete="current-password" value={authPassword} onChange={(e) => setAuthPassword(e.target.value)} placeholder="••••••••" /></label>
+            <button type="submit" disabled={authBusy} className="welcome-submit">{authBusy ? "جارٍ تسجيل الدخول..." : "تسجيل الدخول"}</button>
+            <p className="welcome-note">يجب إنشاء حساب المدير من لوحة Supabase أولًا.</p>
+          </form>
+        </main>
       </div>
     );
   }
