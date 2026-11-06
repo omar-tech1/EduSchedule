@@ -3437,3 +3437,50 @@ body {
     font-size: 12px;
   }
 }
+
+/* Compact centered welcome panel */
+.welcome-screen .welcome-panel {
+  width: min(100% - 32px, 650px) !important;
+  padding: 32px 34px 36px !important;
+}
+
+.welcome-screen .welcome-brand,
+.welcome-screen .welcome-intro,
+.welcome-screen .entry-cards {
+  max-width: 540px;
+}
+
+.welcome-screen .entry-cards {
+  grid-template-columns: repeat(2, minmax(210px, 240px)) !important;
+  gap: 14px;
+}
+
+.welcome-screen .entry-card {
+  min-height: 190px;
+  padding: 20px 18px 62px;
+}
+
+.welcome-screen .entry-card-icon {
+  width: 58px;
+  height: 58px;
+  margin-bottom: 20px;
+}
+
+.welcome-screen .entry-card strong {
+  font-size: 23px;
+}
+
+.welcome-screen .entry-card small {
+  font-size: 13px;
+}
+
+@media (max-width: 760px) {
+  .welcome-screen .welcome-panel {
+    width: calc(100% - 20px) !important;
+    padding: 26px 16px 30px !important;
+  }
+
+  .welcome-screen .entry-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
