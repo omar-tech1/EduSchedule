@@ -3301,3 +3301,19 @@ body {
     font-size: 13px;
   }
 }
+
+/* Center the entry cards as a group */
+.welcome-screen .entry-cards {
+  width: 100%;
+  max-width: 680px;
+  grid-template-columns: repeat(2, minmax(220px, 280px));
+  justify-content: center;
+  justify-items: stretch;
+  margin-inline: auto;
+}
+
+@media (max-width: 760px) {
+  .welcome-screen .entry-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
