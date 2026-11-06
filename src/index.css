@@ -2742,9 +2742,10 @@ body {
   position: relative;
   isolation: isolate;
   min-height: 100vh;
-  background:
-    linear-gradient(90deg, rgba(255, 253, 248, 0.97) 0%, rgba(255, 253, 248, 0.9) 45%, rgba(31, 73, 56, 0.28) 100%),
-    url("/college-cover.png") center / cover fixed;
+  background: linear-gradient(90deg, rgba(255, 253, 248, 0.97) 0%, rgba(255, 253, 248, 0.9) 45%, rgba(31, 73, 56, 0.28) 100%);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .welcome-screen .welcome-photo {
