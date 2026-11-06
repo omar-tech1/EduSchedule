@@ -676,17 +676,6 @@ function App() {
 
         <nav className="sidebar-nav">
           <button
-            className={`nav-item ${activePage === "نظرة عامة" ? "active" : ""}`}
-            onClick={() => {
-              setActivePage("نظرة عامة");
-              setMobileMenuOpen(false);
-            }}
-          >
-            <LayoutDashboard size={19} />
-            <span>نظرة عامة</span>
-          </button>
-
-          <button
             className={`nav-item ${activePage === "المحاضرات" ? "active" : ""}`}
             onClick={() => {
               setActivePage("المحاضرات");
@@ -696,16 +685,18 @@ function App() {
             <CalendarDays size={19} />
             <span>جدول المحاضرات</span>
           </button>
+          <button
+            className="nav-item"
+            onClick={() => {
+              setAdminDepartmentChoice("");
+              setAdminYearChoice("");
+              setMobileMenuOpen(false);
+            }}
+          >
+            <Users size={19} />
+            <span>تغيير القسم</span>
+          </button>
         </nav>
-
-        <div className="sidebar-section-actions">
-          <button className={`nav-item ${activePage === "المحاضرات" ? "active" : ""}`} onClick={() => { setActivePage("المحاضرات"); setMobileMenuOpen(false); document.querySelector(".schedule-section")?.scrollIntoView({ behavior: "smooth", block: "start" }); }}>
-            <CalendarDays size={19} /><span>جدول {adminDepartmentChoice}</span>
-          </button>
-          <button className="nav-item" onClick={() => { setAdminDepartmentChoice(""); setAdminYearChoice(""); setMobileMenuOpen(false); }}>
-            <Users size={19} /><span>تغيير القسم</span>
-          </button>
-        </div>
 
         <div className="sidebar-bottom">
           <div className="sidebar-help-icon">
@@ -846,6 +837,7 @@ function App() {
             </article>
           </section>
 
+          {activePage === "المحاضرات" && (
           <section className="schedule-section">
             <div className="section-heading">
               <div>
@@ -989,7 +981,7 @@ function App() {
                 البيانات محفوظة على هذا الجهاز
               </span>
             </footer>
-          </section>
+          </section>}
         </section>
       </main>
 
