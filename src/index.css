@@ -3317,3 +3317,12 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* Final welcome panel position and opacity */
+.welcome-screen .welcome-panel {
+  position: relative;
+  width: min(100% - 32px, 980px);
+  margin: auto;
+  background: #fffdf8e3 !important;
+  opacity: 1;
+}
