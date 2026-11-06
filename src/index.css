@@ -2978,3 +2978,153 @@ body {
     max-width: none;
   }
 }
+
+
+/* Focused administrator entry and clearer welcome image */
+.welcome-screen .welcome-panel {
+  background: rgba(255, 253, 248, 0.68);
+  backdrop-filter: blur(1px);
+}
+
+.welcome-screen .entry-cards {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin-inline: auto;
+}
+
+.admin-entry-screen {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: linear-gradient(135deg, #e8f1e7, #f8f6ed);
+}
+
+.admin-entry-card {
+  width: min(100%, 820px);
+  padding: 42px;
+  background: #fffdf8;
+  border: 1px solid #d7e2d8;
+  border-radius: 28px;
+  box-shadow: 0 22px 60px rgba(33, 71, 56, .14);
+  text-align: center;
+}
+
+.admin-entry-logo {
+  width: 76px;
+  height: 76px;
+  margin-bottom: 12px;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 8px 20px rgba(33, 71, 56, .12);
+}
+
+.admin-entry-card h1 {
+  margin: 6px 0;
+  color: #214738;
+  font-size: clamp(26px, 4vw, 38px);
+}
+
+.admin-entry-card > p:not(.eyebrow) {
+  margin: 0 0 26px;
+  color: #70867a;
+}
+
+.admin-entry-departments {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.admin-entry-department {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  min-height: 150px;
+  padding: 18px 10px;
+  color: #2f5545;
+  background: #f5faf3;
+  border: 1px solid #d2e2d2;
+  border-radius: 18px;
+  transition: .2s ease;
+}
+
+.admin-entry-department:hover {
+  color: white;
+  background: #39745a;
+  border-color: #39745a;
+  transform: translateY(-4px);
+}
+
+.admin-entry-department span {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  color: #39745a;
+  background: #dcecdf;
+  border-radius: 15px;
+}
+
+.admin-entry-department:hover span {
+  color: #39745a;
+  background: white;
+}
+
+.admin-entry-department strong {
+  font-size: 13px;
+}
+
+.admin-entry-department small {
+  color: #70867a;
+  font-size: 10px;
+}
+
+.admin-entry-department:hover small {
+  color: #e7f2e6;
+}
+
+.admin-entry-year {
+  display: grid;
+  gap: 16px;
+  max-width: 360px;
+  margin: 0 auto;
+  text-align: right;
+}
+
+.selected-department {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  padding: 12px;
+  color: #39745a;
+  background: #e7f2e6;
+  border-radius: 12px;
+  font-weight: 800;
+}
+
+.entry-change-button {
+  min-height: 40px;
+  color: #39745a;
+  background: transparent;
+  border: 1px solid #c5d8c7;
+  border-radius: 10px;
+}
+
+.sidebar-section-actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+@media (max-width: 760px) {
+  .admin-entry-card {
+    padding: 28px 16px;
+  }
+
+  .admin-entry-departments {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
