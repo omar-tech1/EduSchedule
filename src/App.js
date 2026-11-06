@@ -554,7 +554,7 @@ function App() {
 
   if (!session) {
     return (
-      <div className="welcome-screen" dir="rtl">
+      <div className="welcome-screen" dir="rtl" style={{ backgroundImage: `linear-gradient(90deg, rgba(255, 253, 248, 0.97) 0%, rgba(255, 253, 248, 0.9) 45%, rgba(31, 73, 56, 0.28) 100%), url(${process.env.PUBLIC_URL}/college-cover.png)` }}>
         <div className="welcome-photo" style={{ backgroundImage: `linear-gradient(155deg, rgba(26, 67, 49, 0.08), rgba(18, 48, 39, 0.7)), url(${process.env.PUBLIC_URL}/college-cover.png)` }} aria-hidden="true">
           <div className="welcome-photo-shape" />
           <div className="welcome-photo-copy">
