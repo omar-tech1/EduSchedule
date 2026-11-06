@@ -981,7 +981,7 @@ function App() {
                 البيانات محفوظة على هذا الجهاز
               </span>
             </footer>
-          </section>}
+          </section>)}
         </section>
       </main>
 
