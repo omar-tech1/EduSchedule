@@ -3326,3 +3326,47 @@ body {
   background: #fffdf8e3 !important;
   opacity: 1;
 }
+
+/* Give welcome entry labels enough room beside the arrow */
+.welcome-screen .welcome-panel {
+  width: min(100% - 32px, 1080px);
+}
+
+.welcome-screen .entry-cards {
+  max-width: 780px;
+  grid-template-columns: repeat(2, minmax(300px, 350px));
+}
+
+.welcome-screen .entry-card {
+  min-width: 0;
+  padding-inline: 30px 54px;
+}
+
+.welcome-screen .entry-card strong,
+.welcome-screen .entry-card small {
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.welcome-screen .entry-card small {
+  font-size: 14px;
+}
+
+@media (max-width: 760px) {
+  .welcome-screen .entry-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .welcome-screen .entry-card {
+    padding-inline: 16px 46px;
+  }
+
+  .welcome-screen .entry-card strong {
+    font-size: 20px;
+  }
+
+  .welcome-screen .entry-card small {
+    font-size: 11px;
+  }
+}
