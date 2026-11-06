@@ -3179,3 +3179,46 @@ body {
     background: rgba(255, 253, 248, 0.42);
   }
 }
+
+
+/* Final administrator navigation and readable controls */
+.sidebar-section-actions {
+  display: none !important;
+}
+
+.sidebar-nav {
+  gap: 10px;
+}
+
+.app-shell:not(.student-portal) .brand h2,
+.app-shell:not(.student-portal) .brand span {
+  color: #f5fff6;
+}
+
+.app-shell:not(.student-portal) .brand span {
+  color: #c1d8c5;
+}
+
+.app-shell:not(.student-portal) .form-field select,
+.app-shell:not(.student-portal) .filters-row > select {
+  color: #214738 !important;
+  background: #fffdf8 !important;
+  border-color: #9fbea5 !important;
+  opacity: 1 !important;
+}
+
+.app-shell:not(.student-portal) .form-field select option,
+.app-shell:not(.student-portal) .filters-row > select option {
+  color: #214738;
+  background: #fffdf8;
+}
+
+.app-shell:not(.student-portal) .form-field > span {
+  color: #214738 !important;
+}
+
+@media print {
+  .schedule-section {
+    display: block !important;
+  }
+}
