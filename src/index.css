@@ -3370,3 +3370,70 @@ body {
     font-size: 11px;
   }
 }
+
+/* Explicitly center the complete welcome panel and protect entry labels */
+.welcome-screen {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.welcome-screen .welcome-panel {
+  position: relative !important;
+  inset: auto !important;
+  float: none !important;
+  width: min(100% - 32px, 1080px) !important;
+  min-height: auto !important;
+  margin: 24px auto !important;
+  transform: none !important;
+  background: #fffdf8e3 !important;
+}
+
+.welcome-screen .entry-cards {
+  display: grid !important;
+  width: 100% !important;
+  max-width: 780px !important;
+  grid-template-columns: repeat(2, minmax(300px, 350px)) !important;
+  justify-content: center !important;
+  margin-inline: auto !important;
+}
+
+.welcome-screen .entry-card {
+  width: 100%;
+  min-width: 0;
+  padding-bottom: 76px;
+}
+
+.welcome-screen .entry-card strong,
+.welcome-screen .entry-card small {
+  display: block;
+  width: 100%;
+  max-width: none;
+  overflow: visible;
+  white-space: normal;
+  word-break: keep-all;
+}
+
+.welcome-screen .entry-card small {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+  .welcome-screen .welcome-panel {
+    width: calc(100% - 20px) !important;
+    margin: 12px auto !important;
+  }
+
+  .welcome-screen .entry-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .welcome-screen .entry-card {
+    padding: 20px 14px 68px;
+  }
+
+  .welcome-screen .entry-card small {
+    font-size: 12px;
+  }
+}
