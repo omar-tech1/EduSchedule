@@ -3128,3 +3128,54 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+
+/* Final clear college cover and selected schedule presentation */
+.welcome-screen {
+  background-color: #365d4b !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+}
+
+.welcome-screen .welcome-panel {
+  background: rgba(255, 253, 248, 0.48);
+  box-shadow: 0 22px 70px rgba(18, 48, 39, .22);
+  backdrop-filter: blur(1px);
+}
+
+.welcome-screen .welcome-intro,
+.welcome-screen .welcome-brand,
+.welcome-screen .entry-cards {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.welcome-screen .entry-cards {
+  justify-content: center;
+}
+
+.admin-entry-screen {
+  background: linear-gradient(135deg, #edf4eb, #fffdf8);
+}
+
+.admin-entry-card {
+  position: relative;
+}
+
+.admin-entry-card .primary-button {
+  justify-content: center;
+  width: 100%;
+}
+
+.schedule-section .section-heading p::after {
+  content: " — جدول القسم والفرقة المختارة";
+  color: #39745a;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .welcome-screen .welcome-panel {
+    background: rgba(255, 253, 248, 0.42);
+  }
+}
