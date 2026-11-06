@@ -327,7 +327,11 @@ function App() {
     });
   }
 
+  const accountDepartment = session?.user?.user_metadata?.department || "";
+  const departmentScope = DEPARTMENTS.includes(accountDepartment) ? accountDepartment : "";
+
   const filteredLectures = lectures
+    .filter((lecture) => !departmentScope || lecture.department === departmentScope)
     .filter((lecture) => {
       const searchValue = search.trim().toLowerCase();
 
@@ -737,6 +741,35 @@ function App() {
               <Plus size={19} />
               إضافة محاضرة
             </button>
+          </section>
+
+          <section className="department-section">
+            <div className="section-heading department-heading">
+              <div>
+                <h2><Users size={21} /> أقسام الكلية</h2>
+                <p>{departmentScope ? `أنت تدير جدول قسم ${departmentScope}` : "اختار قسمًا لعرض جدول محاضراته فقط"}</p>
+              </div>
+              {departmentScope && <button className="secondary-button" onClick={() => setDepartmentFilter("الكل")}>عرض كل الأقسام</button>}
+            </div>
+            <div className="department-cards">
+              {DEPARTMENTS.map((department, index) => {
+                const DepartmentIcon = [GraduationCap, CalendarDays, MapPin, Users][index];
+                const active = (departmentScope || departmentFilter) === department;
+                return (
+                  <button
+                    className={`department-card ${active ? "active" : ""}`}
+                    key={department}
+                    type="button"
+                    onClick={() => setDepartmentFilter(department)}
+                    disabled={Boolean(departmentScope && departmentScope !== department)}
+                  >
+                    <span className="department-card-icon"><DepartmentIcon size={25} /></span>
+                    <span><strong>{department}</strong><small>{lectures.filter((lecture) => lecture.department === department).length} محاضرة</small></span>
+                    <CalendarDays size={18} className="department-card-arrow" />
+                  </button>
+                );
+              })}
+            </div>
           </section>
 
           <section className="stats-grid">
