@@ -2878,3 +2878,103 @@ body {
     display: none;
   }
 }
+
+
+/* Centered welcome with a clear full-page college background */
+.welcome-screen {
+  display: grid !important;
+  place-items: center;
+  min-height: 100vh;
+  background-color: #315c49;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.welcome-screen .welcome-photo {
+  display: none;
+}
+
+.welcome-screen .welcome-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100% - 32px, 980px);
+  min-height: auto;
+  margin: 32px auto;
+  padding: 42px 48px 48px;
+  background: rgba(255, 253, 248, 0.9);
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 30px;
+  box-shadow: 0 22px 70px rgba(18, 48, 39, .28);
+  backdrop-filter: blur(2px);
+}
+
+.welcome-screen .welcome-brand,
+.welcome-screen .welcome-intro,
+.welcome-screen .entry-cards,
+.welcome-screen .welcome-login {
+  width: min(100%, 720px);
+}
+
+.welcome-screen .welcome-brand,
+.welcome-screen .welcome-intro {
+  justify-content: center;
+  text-align: center;
+}
+
+.welcome-screen .welcome-brand {
+  align-items: center;
+}
+
+.welcome-screen .entry-cards {
+  justify-content: center;
+  margin-inline: auto;
+}
+
+.welcome-screen .welcome-login {
+  margin-inline: auto;
+}
+
+.setup-progress {
+  align-self: center;
+  padding: 7px 12px;
+  color: #39745a;
+  background: #e7f2e6;
+  border: 1px solid #bdd5bd;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.admin-setup-next {
+  display: flex;
+  align-items: end;
+  gap: 14px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #dce8dc;
+}
+
+.admin-setup-next .form-field {
+  flex: 1;
+  max-width: 280px;
+}
+
+@media (max-width: 760px) {
+  .welcome-screen .welcome-panel {
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 30px 16px 34px;
+    border-radius: 24px;
+  }
+
+  .admin-setup-next {
+    display: grid;
+    align-items: stretch;
+  }
+
+  .admin-setup-next .form-field {
+    max-width: none;
+  }
+}
