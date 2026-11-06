@@ -173,6 +173,8 @@ function App() {
   const [studentLoading, setStudentLoading] = useState(false);
   const [studentSearched, setStudentSearched] = useState(false);
   const [studentError, setStudentError] = useState("");
+  const [adminDepartmentChoice, setAdminDepartmentChoice] = useState("");
+  const [adminYearChoice, setAdminYearChoice] = useState("");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -746,22 +748,25 @@ function App() {
           <section className="department-section">
             <div className="section-heading department-heading">
               <div>
-                <h2><Users size={21} /> أقسام الكلية</h2>
-                <p>{departmentScope ? `أنت تدير جدول قسم ${departmentScope}` : "اختار قسمًا لعرض جدول محاضراته فقط"}</p>
+                <p className="eyebrow">إعداد جدول القسم</p>
+                <h2><Users size={21} /> اختار قسمك أولًا</h2>
+                <p>حدد القسم ثم الفرقة الدراسية قبل إضافة المحاضرات.</p>
               </div>
-              {departmentScope && <button className="secondary-button" onClick={() => setDepartmentFilter("الكل")}>عرض كل الأقسام</button>}
+              {adminDepartmentChoice && <span className="setup-progress">الخطوة {adminYearChoice ? "2" : "1"} من 2</span>}
             </div>
             <div className="department-cards">
               {DEPARTMENTS.map((department, index) => {
                 const DepartmentIcon = [GraduationCap, CalendarDays, MapPin, Users][index];
-                const active = (departmentScope || departmentFilter) === department;
+                const active = adminDepartmentChoice === department;
                 return (
                   <button
                     className={`department-card ${active ? "active" : ""}`}
                     key={department}
                     type="button"
-                    onClick={() => setDepartmentFilter(department)}
-                    disabled={Boolean(departmentScope && departmentScope !== department)}
+                    onClick={() => {
+                      setAdminDepartmentChoice(department);
+                      setAdminYearChoice("");
+                    }}
                   >
                     <span className="department-card-icon"><DepartmentIcon size={25} /></span>
                     <span><strong>{department}</strong><small>{lectures.filter((lecture) => lecture.department === department).length} محاضرة</small></span>
@@ -770,6 +775,31 @@ function App() {
                 );
               })}
             </div>
+            {adminDepartmentChoice && (
+              <div className="admin-setup-next">
+                <label className="form-field">
+                  <span>الفرقة الدراسية</span>
+                  <select value={adminYearChoice} onChange={(event) => setAdminYearChoice(event.target.value)}>
+                    <option value="">اختار الفرقة</option>
+                    {STUDY_YEARS.map((year) => <option key={year} value={year}>الفرقة {year}</option>)}
+                  </select>
+                </label>
+                <button
+                  className="primary-button"
+                  type="button"
+                  disabled={!adminYearChoice}
+                  onClick={() => {
+                    setDepartmentFilter(adminDepartmentChoice);
+                    setSearch("");
+                    setForm((previous) => ({ ...previous, department: adminDepartmentChoice, studyYear: adminYearChoice }));
+                    setActivePage("المحاضرات");
+                    document.querySelector(".schedule-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                >
+                  <CalendarDays size={18} /> بدء إضافة جدول {adminDepartmentChoice}
+                </button>
+              </div>
+            )}
           </section>
 
           <section className="stats-grid">
