@@ -3484,3 +3484,50 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
+
+/* Shrink the centered welcome composition by another 10% */
+.welcome-screen .welcome-panel {
+  width: min(100% - 32px, 585px) !important;
+  padding: 29px 31px 32px !important;
+}
+
+.welcome-screen .welcome-brand,
+.welcome-screen .welcome-intro,
+.welcome-screen .entry-cards {
+  max-width: 486px;
+}
+
+.welcome-screen .entry-cards {
+  grid-template-columns: repeat(2, minmax(190px, 216px)) !important;
+  gap: 13px;
+}
+
+.welcome-screen .entry-card {
+  min-height: 171px;
+  padding: 18px 16px 56px;
+}
+
+.welcome-screen .entry-card-icon {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 18px;
+}
+
+.welcome-screen .entry-card strong {
+  font-size: 21px;
+}
+
+.welcome-screen .entry-card small {
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .welcome-screen .welcome-panel {
+    width: calc(100% - 20px) !important;
+    padding: 24px 14px 28px !important;
+  }
+
+  .welcome-screen .entry-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
