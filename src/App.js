@@ -334,6 +334,7 @@ function App() {
 
   const filteredLectures = lectures
     .filter((lecture) => !departmentScope || lecture.department === departmentScope)
+    .filter((lecture) => !adminDepartmentChoice || lecture.department === adminDepartmentChoice)
     .filter((lecture) => !adminYearChoice || lecture.studyYear === adminYearChoice)
     .filter((lecture) => {
       const searchValue = search.trim().toLowerCase();
@@ -557,7 +558,7 @@ function App() {
 
   if (!session) {
     return (
-      <div className="welcome-screen" dir="rtl" style={{ backgroundImage: `linear-gradient(90deg, rgba(255, 253, 248, 0.97) 0%, rgba(255, 253, 248, 0.9) 45%, rgba(31, 73, 56, 0.28) 100%), url(${process.env.PUBLIC_URL}/college-cover.png)` }}>
+      <div className="welcome-screen" dir="rtl" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/college-cover.png)` }}>
         <div className="welcome-photo" style={{ backgroundImage: `linear-gradient(155deg, rgba(26, 67, 49, 0.08), rgba(18, 48, 39, 0.7)), url(${process.env.PUBLIC_URL}/college-cover.png)` }} aria-hidden="true">
           <div className="welcome-photo-shape" />
           <div className="welcome-photo-copy">
@@ -635,7 +636,7 @@ function App() {
               <div className="selected-department"><CalendarDays size={19} /> {adminDepartmentChoice}</div>
               <label className="form-field">
                 <span>الفرقة الدراسية</span>
-                <select value={adminYearChoice} onChange={(event) => setAdminYearChoice(event.target.value)}>
+                <select value={adminYearChoice} onChange={(event) => { const year = event.target.value; setAdminYearChoice(year); setForm((previous) => ({ ...previous, department: adminDepartmentChoice, studyYear: year })); }}>
                   <option value="">اختار الفرقة</option>
                   {STUDY_YEARS.map((year) => <option key={year} value={year}>الفرقة {year}</option>)}
                 </select>
@@ -1010,7 +1011,7 @@ function App() {
                 <h2 id="modal-title">
                   {editingId ? "تعديل المحاضرة" : "إضافة محاضرة جديدة"}
                 </h2>
-                <p>اكتب بيانات المحاضرة وحدد موعدها والمدرج.</p>
+                <p>أضف تفاصيل المحاضرة وحدد المدرج واليوم والوقت.</p>
               </div>
 
               <button
@@ -1049,26 +1050,6 @@ function App() {
               </label>
 
               <div className="form-grid">
-                <label className="form-field">
-                  <span>القسم *</span>
-                  <select
-                    name="department"
-                    value={form.department}
-                    onChange={updateForm}
-                    required
-                  >
-                    {DEPARTMENTS.map((department) => (
-                      <option key={department} value={department}>
-                        {department}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-
-                <label className="form-field">
-                  <span>الفرقة الدراسية *</span>
-                  <select name="studyYear" value={form.studyYear} onChange={updateForm} required>{STUDY_YEARS.map((year) => <option key={year} value={year}>الفرقة {year}</option>)}</select>
-                </label>
                 <label className="form-field">
                   <span>المدرج *</span>
                   <select
