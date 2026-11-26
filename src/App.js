@@ -594,14 +594,14 @@ function App() {
           <header className="welcome-brand">
             <img src={`${process.env.PUBLIC_URL}/college-logo.jpg`} alt="" />
             <div>
-              <strong>كلية التربية النوعية</strong>
-              <span>نظام جدول المحاضرات</span>
+              <strong>EduSchedule</strong>
+              <span>كلية التربية النوعية</span>
             </div>
           </header>
           <div className="welcome-intro">
-            <span>أهلاً بك</span>
-            <h1>اختر طريقة الدخول</h1>
-            <p>اعرض جدولك الدراسي أو سجّل الدخول لإدارة المحاضرات.</p>
+            <span className="welcome-semester"><i /> الفصل الدراسي الأول 2026</span>
+            <h1>جدول محاضراتك، <em>في مكان واحد</em></h1>
+            <p>شوف مواعيد محاضراتك وقاعاتك في ثواني، أو سجّل دخولك كمسؤول لإدارة الجدول من غير تعقيدات.</p>
           </div>
           <div className="entry-cards">
             <button className="entry-card entry-card-student" type="button" onClick={() => setShowStudentPortal(true)}>
@@ -616,6 +616,11 @@ function App() {
               <small>تسجيل الدخول</small>
               <span className="entry-arrow">←</span>
             </button>
+          </div>
+          <div className="welcome-stats">
+            <div><strong>4</strong><span>أقسام</span></div>
+            <div><strong>16</strong><span>فرقة دراسية</span></div>
+            <div><strong>+120</strong><span>محاضرة أسبوعيًا</span></div>
           </div>
           {showAdminLogin && <form className="welcome-login" onSubmit={signIn}>
             <div className="welcome-login-heading">
