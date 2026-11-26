@@ -12,6 +12,8 @@ import {
   Users,
   X,
   Printer,
+  Moon,
+  Sun,
   FileSpreadsheet,
   Trash2,
   Menu,
@@ -167,6 +169,7 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [showStudentPortal, setShowStudentPortal] = useState(false);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem("eduschedule-theme") === "dark");
   const [studentDepartment, setStudentDepartment] = useState(DEPARTMENTS[0]);
   const [studentYear, setStudentYear] = useState(STUDY_YEARS[0]);
   const [studentLectures, setStudentLectures] = useState([]);
@@ -566,7 +569,20 @@ function App() {
 
   if (!session) {
     return (
-      <div className="welcome-screen" dir="rtl" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/college-cover.webp)` }}>
+      <div className={`welcome-screen ${darkMode ? "dark-mode" : ""}`} dir="rtl" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/college-cover.webp)` }}>
+        <button
+          className="theme-toggle"
+          type="button"
+          onClick={() => {
+            const nextMode = !darkMode;
+            setDarkMode(nextMode);
+            localStorage.setItem("eduschedule-theme", nextMode ? "dark" : "light");
+          }}
+          aria-label={darkMode ? "تفعيل الوضع الفاتح" : "تفعيل الوضع الداكن"}
+          title={darkMode ? "الوضع الفاتح" : "الوضع الداكن"}
+        >
+          {darkMode ? <Sun size={21} /> : <Moon size={21} />}
+        </button>
         <div className="welcome-photo" style={{ backgroundImage: `linear-gradient(155deg, rgba(26, 67, 49, 0.08), rgba(18, 48, 39, 0.7)), url(${process.env.PUBLIC_URL}/college-cover.webp)` }} aria-hidden="true">
           <div className="welcome-photo-shape" />
           <div className="welcome-photo-copy">
