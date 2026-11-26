@@ -22,6 +22,7 @@ import {
   Pencil,
 } from "lucide-react";
 import "./index.css";
+import "./v3.css";
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL || "https://kfpxswcxwkghixvjzkgq.supabase.co",
@@ -500,15 +501,31 @@ function App() {
     }
   }
   
+  const themeButton = (
+    <button
+      className="v3-theme"
+      type="button"
+      onClick={() => {
+        const nextMode = !darkMode;
+        setDarkMode(nextMode);
+        localStorage.setItem("eduschedule-theme", nextMode ? "dark" : "light");
+      }}
+      aria-label={darkMode ? "تفعيل الوضع الفاتح" : "تفعيل الوضع الداكن"}
+      title={darkMode ? "الوضع الفاتح" : "الوضع الداكن"}
+    >
+      {darkMode ? <Sun size={19} /> : <Moon size={19} />}
+    </button>
+  );
+
   if (dataLoading && !session) {
-    return <div className="app-shell" dir="rtl"><main className="main-content"><h2>جارٍ الاتصال بقاعدة البيانات...</h2></main></div>;
+    return <div className={`app-shell v3-screen ${darkMode ? "dark-mode" : ""}`} dir="rtl"><main className="main-content"><h2>جارٍ الاتصال بقاعدة البيانات...</h2></main></div>;
   }
 
   if (!session && showStudentPortal) {
     return (
-      <div className="app-shell student-portal" dir="rtl">
+      <div className={`app-shell student-portal v3-screen ${darkMode ? "dark-mode" : ""}`} dir="rtl">
         <main className="student-main">
-          <header className="student-header"><div className="student-brand-icon"><img src={`${process.env.PUBLIC_URL}/college-logo.jpg`} alt="" /></div><div><h1>EduSchedule</h1><p>بوابة الطالب — جدول محاضراتك</p></div></header>
+          <header className="student-header"><div className="student-brand-icon"><img src={`${process.env.PUBLIC_URL}/college-logo.jpg`} alt="" /></div><div><h1>EduSchedule</h1><p>بوابة الطالب — جدول محاضراتك</p></div>{themeButton}</header>
           <section className="student-card"><p className="eyebrow">بوابة الطلاب</p><h2>اعرف جدولك الدراسي</h2><p className="student-description">اختار القسم والفرقة علشان تعرض المحاضرات الخاصة بيك.</p>
             <form className="student-select-form" onSubmit={loadStudentSchedule}>
               <label className="form-field"><span>القسم</span><select value={studentDepartment} onChange={(e) => { setStudentDepartment(e.target.value); setStudentSearched(false); }}>{DEPARTMENTS.map((department) => <option key={department} value={department}>{department}</option>)}</select></label>
@@ -569,7 +586,7 @@ function App() {
 
   if (!session) {
     return (
-      <div className={`welcome-screen ${darkMode ? "dark-mode" : ""}`} dir="rtl" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/college-cover.webp)` }}>
+      <div className={`welcome-screen welcome-v3 ${darkMode ? "dark-mode" : ""}`} dir="rtl" style={{ "--cover": `url(${process.env.PUBLIC_URL}/college-cover.webp)` }}>
         <button
           className="theme-toggle"
           type="button"
@@ -594,28 +611,33 @@ function App() {
           <header className="welcome-brand">
             <img src={`${process.env.PUBLIC_URL}/college-logo.jpg`} alt="" />
             <div>
-              <strong>كلية التربية النوعية</strong>
-              <span>نظام جدول المحاضرات</span>
+              <strong>EduSchedule</strong>
+              <span>كلية التربية النوعية</span>
             </div>
           </header>
           <div className="welcome-intro">
-            <span>أهلاً بك</span>
-            <h1>اختر طريقة الدخول</h1>
-            <p>اعرض جدولك الدراسي أو سجّل الدخول لإدارة المحاضرات.</p>
+            <span className="welcome-semester"><i /> الفصل الدراسي الأول 2026</span>
+            <h1>جدول محاضراتك، <em>في مكان واحد</em></h1>
+            <p>شوف مواعيد محاضراتك وقاعاتك في ثواني، أو سجّل دخولك كمسؤول لإدارة الجداول من غير تعارضات.</p>
           </div>
           <div className="entry-cards">
             <button className="entry-card entry-card-student" type="button" onClick={() => setShowStudentPortal(true)}>
-              <span className="entry-card-icon"><GraduationCap size={34} /></span>
+              <span className="entry-card-icon"><GraduationCap size={30} /></span>
               <strong>طالب</strong>
-              <small>تصفح الجداول</small>
-              <span className="entry-arrow">←</span>
+              <small>تصفح الجداول بدون تسجيل</small>
+              <span className="entry-arrow">ابدأ الآن ←</span>
             </button>
-            <button className="entry-card" type="button" onClick={() => setShowAdminLogin(true)}>
-              <span className="entry-card-icon"><Users size={31} /></span>
+            <button className="entry-card entry-card-admin" type="button" onClick={() => setShowAdminLogin(true)}>
+              <span className="entry-card-icon"><Users size={28} /></span>
               <strong>مسؤول</strong>
-              <small>تسجيل الدخول</small>
-              <span className="entry-arrow">←</span>
+              <small>إدارة المحاضرات والقاعات</small>
+              <span className="entry-arrow">تسجيل الدخول ←</span>
             </button>
+          </div>
+          <div className="welcome-stats">
+            <div><strong>4</strong><span>أقسام</span></div>
+            <div><strong>16</strong><span>فرقة دراسية</span></div>
+            <div><strong dir="ltr">+120</strong><span>محاضرة أسبوعيًا</span></div>
           </div>
           {showAdminLogin && <form className="welcome-login" onSubmit={signIn}>
             <div className="welcome-login-heading">
@@ -636,8 +658,9 @@ function App() {
 
   if (session && (!adminDepartmentChoice || !adminYearChoice)) {
     return (
-      <div className="admin-entry-screen" dir="rtl">
+      <div className={`admin-entry-screen v3-screen ${darkMode ? "dark-mode" : ""}`} dir="rtl">
         <section className="admin-entry-card">
+          {themeButton}
           <img className="admin-entry-logo" src={`${process.env.PUBLIC_URL}/college-logo.jpg`} alt="" />
           <p className="eyebrow">لوحة المسؤول</p>
           <h1>{adminDepartmentChoice ? "اختار الفرقة الدراسية" : "اختار القسم"}</h1>
@@ -757,6 +780,7 @@ function App() {
           </div>
 
           <div className="topbar-left">
+            {themeButton}
             <div className="user-avatar">م</div>
             <div className="user-info">
               <strong>مسؤول النظام</strong>
