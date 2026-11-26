@@ -3580,3 +3580,108 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
+
+
+/* Welcome light/dark theme toggle */
+.theme-toggle {
+  position: fixed;
+  z-index: 10;
+  top: 28px;
+  left: 28px;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  color: #214738;
+  background: rgba(255, 253, 248, .9);
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(33, 71, 56, .16);
+  transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px) rotate(-8deg);
+  background: white;
+}
+
+.welcome-screen.dark-mode::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: rgba(5, 18, 14, .58);
+}
+
+.welcome-screen.dark-mode .welcome-panel {
+  z-index: 2;
+  color: #eef8ef;
+  background: rgba(12, 32, 25, .88) !important;
+  border-color: rgba(130, 201, 145, .22);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, .38);
+}
+
+.welcome-screen.dark-mode .welcome-brand strong,
+.welcome-screen.dark-mode .welcome-intro h1,
+.welcome-screen.dark-mode .welcome-intro span,
+.welcome-screen.dark-mode .welcome-intro p {
+  color: #f2fff3;
+}
+
+.welcome-screen.dark-mode .welcome-brand span {
+  color: #b9d5bd;
+}
+
+.welcome-screen.dark-mode .welcome-brand img {
+  border-color: rgba(255,255,255,.35);
+}
+
+.welcome-screen.dark-mode .entry-card,
+.welcome-screen.dark-mode .entry-card-student {
+  background: linear-gradient(145deg, rgba(20, 68, 49, .96), rgba(7, 31, 23, .98));
+  border-color: rgba(125, 216, 148, .28);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .28);
+}
+
+.welcome-screen.dark-mode .entry-card small,
+.welcome-screen.dark-mode .entry-card-student small {
+  color: #c7e9cc;
+}
+
+.welcome-screen.dark-mode .theme-toggle {
+  color: #f8e9aa;
+  background: rgba(13, 45, 34, .92);
+  border-color: rgba(146, 223, 161, .3);
+}
+
+.welcome-screen.dark-mode .welcome-login {
+  color: #eef8ef;
+  background: rgba(15, 45, 34, .92);
+  border-color: rgba(130, 201, 145, .24);
+}
+
+.welcome-screen.dark-mode .welcome-login-heading strong,
+.welcome-screen.dark-mode .welcome-field {
+  color: #eef8ef;
+}
+
+.welcome-screen.dark-mode .welcome-login-heading span,
+.welcome-screen.dark-mode .welcome-note {
+  color: #bad5bf;
+}
+
+.welcome-screen.dark-mode .welcome-field input {
+  color: #eef8ef;
+  background: #173c2d;
+  border-color: #437b5b;
+}
+
+@media (max-width: 760px) {
+  .theme-toggle {
+    top: 16px;
+    left: 16px;
+    width: 42px;
+    height: 42px;
+  }
+}
