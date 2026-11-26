@@ -558,8 +558,8 @@ function App() {
 
   if (!session) {
     return (
-      <div className="welcome-screen" dir="rtl" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/college-cover.png)` }}>
-        <div className="welcome-photo" style={{ backgroundImage: `linear-gradient(155deg, rgba(26, 67, 49, 0.08), rgba(18, 48, 39, 0.7)), url(${process.env.PUBLIC_URL}/college-cover.png)` }} aria-hidden="true">
+      <div className="welcome-screen" dir="rtl" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/college-cover.webp)` }}>
+        <div className="welcome-photo" style={{ backgroundImage: `linear-gradient(155deg, rgba(26, 67, 49, 0.08), rgba(18, 48, 39, 0.7)), url(${process.env.PUBLIC_URL}/college-cover.webp)` }} aria-hidden="true">
           <div className="welcome-photo-shape" />
           <div className="welcome-photo-copy">
             <span>كلية التربية النوعية</span>
