@@ -3996,7 +3996,7 @@ body {
   overflow: hidden !important;
   padding: 48px 7vw !important;
   color: #0e1d15 !important;
-  background: #0b2a1e url('/EduSchedule/college-cover.webp') center/cover !important;
+  background: #0b2a1e center/cover !important;
 }
 .welcome-screen::before {
   content: "";
