@@ -3984,3 +3984,93 @@ body {
     gap: 22px;
   }
 }
+
+
+/* Exact welcome reference styling */
+.welcome-screen {
+  min-height: 100vh !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  overflow: hidden !important;
+  padding: 48px 7vw !important;
+  color: #0e1d15 !important;
+  background: #0b2a1e url('/EduSchedule/college-cover.webp') center/cover !important;
+}
+.welcome-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(270deg,rgba(255,255,255,.95) 0%,rgba(246,248,246,.82) 42%,rgba(246,248,246,.1) 100%) !important;
+}
+.welcome-screen.dark-mode::before {
+  background: linear-gradient(270deg,rgba(6,22,15,.92) 0%,rgba(6,22,15,.72) 42%,rgba(6,22,15,.15) 100%) !important;
+}
+.welcome-screen .welcome-photo { display:none !important; }
+.welcome-screen .welcome-panel {
+  position: relative !important;
+  z-index: 1 !important;
+  inset: auto !important;
+  width: min(100%, 600px) !important;
+  min-height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  transform: none !important;
+  backdrop-filter: none !important;
+}
+.welcome-screen .welcome-brand {
+  position: absolute !important;
+  top: -26px;
+  right: 0;
+  width: 100%;
+  justify-content: flex-start !important;
+}
+.welcome-screen .welcome-brand img { order: -1; width:48px; height:48px; margin-inline-start:12px; }
+.welcome-screen .welcome-intro { margin-top: 72px !important; text-align:right; }
+.welcome-screen .welcome-semester {
+  display:inline-flex; align-items:center; gap:7px; padding:9px 14px;
+  color:#5d6f65; background:rgba(255,255,255,.72); border:1px solid #e4eae6; border-radius:999px; font-size:11px;
+}
+.welcome-screen .welcome-semester i { width:8px; height:8px; background:#14a674; border-radius:50%; }
+.welcome-screen .welcome-intro h1 { margin:16px 0 12px; font-size:42px; line-height:1.25; font-weight:800; letter-spacing:-.5px; color:#0e1d15 !important; }
+.welcome-screen .welcome-intro h1 em { color:#0f7a55; background:linear-gradient(90deg,#0f7a55,#f2a20c); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.welcome-screen .welcome-intro p { margin:0 0 26px; color:#5d6f65 !important; font-size:16px; line-height:1.9; }
+.welcome-screen .entry-cards { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:14px; max-width:520px !important; margin:0 !important; }
+.welcome-screen .entry-card,
+.welcome-screen .entry-card-student {
+  min-height:0; padding:22px; border-radius:20px; background:rgba(255,255,255,.72) !important;
+  backdrop-filter:blur(18px); border:1px solid #e4eae6; box-shadow:0 1px 2px rgba(14,29,21,.05),0 12px 32px -12px rgba(14,29,21,.12);
+  color:#0e1d15 !important; text-align:right;
+}
+.welcome-screen .entry-card-student { background:rgba(255,255,255,.72) !important; }
+.welcome-screen .entry-card-icon { width:52px; height:52px; margin-bottom:14px; border-radius:16px; background:#f1f5f2 !important; color:#0f7a55 !important; }
+.welcome-screen .entry-card strong { display:block; font-size:18px; color:#0e1d15 !important; }
+.welcome-screen .entry-card small { display:block; margin-top:4px; color:#5d6f65 !important; font-size:13px; }
+.welcome-screen .entry-arrow { position:static !important; display:block; width:auto !important; height:auto !important; margin-top:14px; padding:0 !important; color:#0f7a55 !important; background:transparent !important; font-size:18px !important; }
+.welcome-screen.dark-mode .welcome-intro h1,
+.welcome-screen.dark-mode .welcome-brand strong,
+.welcome-screen.dark-mode .entry-card strong { color:#eaf4ee !important; }
+.welcome-screen.dark-mode .welcome-intro p,
+.welcome-screen.dark-mode .entry-card small { color:#8fa699 !important; }
+.welcome-screen.dark-mode .entry-card,
+.welcome-screen.dark-mode .entry-card-student { background:rgba(14,24,18,.7) !important; border-color:#1e3027; }
+.welcome-screen.dark-mode .entry-card-icon { background:#13211a !important; color:#34d399 !important; }
+@media (max-width:760px) {
+  .welcome-screen { align-items:flex-end !important; padding:80px 20px 28px !important; overflow:auto !important; }
+  .welcome-screen .welcome-panel { width:100% !important; }
+  .welcome-screen .welcome-brand { top:-58px; right:0; }
+  .welcome-screen .welcome-intro { margin-top:0 !important; }
+  .welcome-screen .welcome-intro h1 { font-size:30px; }
+  .welcome-screen .welcome-intro p { font-size:14px; }
+  .welcome-screen .entry-cards { grid-template-columns:1fr !important; }
+  .welcome-screen .entry-card { display:grid; grid-template-columns:auto 1fr; column-gap:14px; padding:14px; }
+  .welcome-screen .entry-card-icon { grid-row:span 2; margin:0; }
+  .welcome-screen .entry-card strong,.welcome-screen .entry-card small { align-self:center; }
+  .welcome-screen .entry-arrow { display:none !important; }
+}

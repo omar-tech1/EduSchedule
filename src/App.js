@@ -599,28 +599,23 @@ function App() {
             </div>
           </header>
           <div className="welcome-intro">
-            <span className="welcome-semester"><i /> الفصل الدراسي الأول 2026</span>
-            <h1>جدول محاضراتك، <em>في مكان واحد</em></h1>
-            <p>شوف مواعيد محاضراتك وقاعاتك في ثواني، أو سجّل دخولك كمسؤول لإدارة الجدول من غير تعقيدات.</p>
+            <span className="welcome-semester"><i /> أهلاً بك</span>
+            <h1>اختر <em>طريقة الدخول</em></h1>
+            <p>اعرض جدولك الدراسي أو سجّل الدخول لإدارة المحاضرات.</p>
           </div>
           <div className="entry-cards">
             <button className="entry-card entry-card-student" type="button" onClick={() => setShowStudentPortal(true)}>
               <span className="entry-card-icon"><GraduationCap size={34} /></span>
               <strong>طالب</strong>
-              <small>تصفح الجدول بدون تسجيل</small>
-              <span className="entry-arrow">ابدأ الآن ←</span>
+              <small>تصفح الجداول</small>
+              <span className="entry-arrow">←</span>
             </button>
             <button className="entry-card" type="button" onClick={() => setShowAdminLogin(true)}>
               <span className="entry-card-icon"><Users size={31} /></span>
               <strong>مسؤول</strong>
-              <small>إدارة المحاضرات والقاعات</small>
-              <span className="entry-arrow">تسجيل الدخول ←</span>
+              <small>تسجيل الدخول</small>
+              <span className="entry-arrow">←</span>
             </button>
-          </div>
-          <div className="welcome-stats">
-            <div><strong>4</strong><span>أقسام</span></div>
-            <div><strong>16</strong><span>فرقة دراسية</span></div>
-            <div><strong>+120</strong><span>محاضرة أسبوعيًا</span></div>
           </div>
           {showAdminLogin && <form className="welcome-login" onSubmit={signIn}>
             <div className="welcome-login-heading">
