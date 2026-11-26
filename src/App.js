@@ -607,14 +607,14 @@ function App() {
             <button className="entry-card entry-card-student" type="button" onClick={() => setShowStudentPortal(true)}>
               <span className="entry-card-icon"><GraduationCap size={34} /></span>
               <strong>طالب</strong>
-              <small>تصفح الجداول</small>
-              <span className="entry-arrow">←</span>
+              <small>تصفح الجداول بدون تسجيل</small>
+              <span className="entry-arrow">ابدأ الآن ←</span>
             </button>
-            <button className="entry-card" type="button" onClick={() => setShowAdminLogin(true)}>
+            <button className="entry-card entry-card-admin" type="button" onClick={() => setShowAdminLogin(true)}>
               <span className="entry-card-icon"><Users size={31} /></span>
               <strong>مسؤول</strong>
-              <small>تسجيل الدخول</small>
-              <span className="entry-arrow">←</span>
+              <small>إدارة المحاضرات والقاعات</small>
+              <span className="entry-arrow">تسجيل الدخول ←</span>
             </button>
           </div>
           {showAdminLogin && <form className="welcome-login" onSubmit={signIn}>
