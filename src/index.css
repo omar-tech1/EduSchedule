@@ -3685,3 +3685,213 @@ body {
     height: 42px;
   }
 }
+
+/* Reference-matched welcome layout */
+.welcome-screen {
+  position: relative !important;
+  display: block !important;
+  min-height: 100vh;
+  overflow: hidden;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+.welcome-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,.02) 0%, rgba(255,253,248,.14) 42%, rgba(255,253,248,.9) 100%);
+}
+
+.welcome-screen .welcome-panel {
+  position: absolute !important;
+  z-index: 2;
+  top: 0;
+  right: 4%;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: min(52vw, 700px) !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 34px 42px 42px !important;
+  color: #173b2d;
+  background: transparent !important;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  transform: none !important;
+}
+
+.welcome-screen .welcome-brand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0;
+  text-align: right;
+}
+
+.welcome-screen .welcome-brand img {
+  order: -1;
+  width: 48px;
+  height: 48px;
+  margin-inline-start: 12px;
+}
+
+.welcome-screen .welcome-brand strong {
+  font-size: 19px;
+}
+
+.welcome-screen .welcome-intro {
+  width: 100%;
+  max-width: none;
+  margin-top: 135px;
+  text-align: right;
+}
+
+.welcome-screen .welcome-intro > span {
+  color: #4f9a6a;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.welcome-screen .welcome-intro h1 {
+  margin: 12px 0 10px;
+  color: #102e23;
+  font-size: clamp(38px, 5vw, 66px);
+  line-height: 1.12;
+}
+
+.welcome-screen .welcome-intro p {
+  max-width: 560px;
+  margin-inline-start: auto;
+  color: #668072;
+  font-size: 15px;
+}
+
+.welcome-screen .entry-cards {
+  width: 100%;
+  max-width: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.welcome-screen .entry-card,
+.welcome-screen .entry-card-student {
+  min-height: 190px;
+  padding: 20px;
+  color: #214738;
+  background: rgba(255,255,255,.9);
+  border: 1px solid rgba(205,220,208,.9);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(33,71,56,.1);
+  text-align: right;
+}
+
+.welcome-screen .entry-card-student {
+  color: #ffffff;
+  background: #205f46;
+  border-color: #205f46;
+}
+
+.welcome-screen .entry-card-icon,
+.welcome-screen .entry-card-student .entry-card-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 24px;
+  color: #2e825b;
+  background: #e8f3eb;
+  border: 0;
+}
+
+.welcome-screen .entry-card-student .entry-card-icon {
+  color: #ffffff;
+  background: rgba(255,255,255,.14);
+}
+
+.welcome-screen .entry-card strong {
+  font-size: 22px;
+}
+
+.welcome-screen .entry-card small {
+  margin-top: 6px;
+  color: #789084;
+  font-size: 12px;
+}
+
+.welcome-screen .entry-card-student small {
+  color: #d3edda;
+}
+
+.welcome-screen .entry-arrow,
+.welcome-screen .entry-card:not(.entry-card-student) .entry-arrow {
+  left: 18px;
+  bottom: 18px;
+  width: 34px;
+  height: 34px;
+  color: #ffffff;
+  background: #62c787;
+  font-size: 18px;
+}
+
+.welcome-screen .entry-card:not(.entry-card-student) .entry-arrow {
+  color: #2e825b;
+  background: #e8f3eb;
+}
+
+.welcome-screen.dark-mode::before {
+  background: linear-gradient(90deg, rgba(4,16,12,.12) 0%, rgba(7,26,19,.38) 42%, rgba(5,20,15,.88) 100%);
+}
+
+.welcome-screen.dark-mode .welcome-intro h1,
+.welcome-screen.dark-mode .welcome-brand strong {
+  color: #f2fff3;
+}
+
+.welcome-screen.dark-mode .welcome-intro p {
+  color: #b5cfba;
+}
+
+.welcome-screen.dark-mode .entry-card,
+.welcome-screen.dark-mode .entry-card-student {
+  background: rgba(8,35,25,.88);
+  border-color: rgba(113,183,128,.28);
+}
+
+.welcome-screen.dark-mode .entry-card-student {
+  background: #0e4b35;
+}
+
+@media (max-width: 760px) {
+  .welcome-screen {
+    overflow: auto;
+  }
+
+  .welcome-screen .welcome-panel {
+    position: relative !important;
+    top: auto;
+    right: auto;
+    width: 100% !important;
+    min-height: 100vh !important;
+    padding: 24px 18px 34px !important;
+  }
+
+  .welcome-screen .welcome-intro {
+    margin-top: 85px;
+  }
+
+  .welcome-screen .entry-cards {
+    gap: 10px;
+  }
+
+  .welcome-screen .entry-card,
+  .welcome-screen .entry-card-student {
+    min-height: 175px;
+    padding: 16px;
+  }
+}
