@@ -3895,3 +3895,92 @@ body {
     padding: 16px;
   }
 }
+
+/* Exact visible copy treatment from the reference */
+.welcome-semester {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  color: #5f7268;
+  background: rgba(239,248,241,.88);
+  border: 1px solid #d7e8d9;
+  border-radius: 999px;
+  font-size: 11px;
+}
+
+.welcome-semester i {
+  width: 8px;
+  height: 8px;
+  background: #32ad72;
+  border-radius: 50%;
+}
+
+.welcome-intro h1 em {
+  color: #4aab61;
+  font-style: normal;
+}
+
+.welcome-stats {
+  display: flex;
+  justify-content: flex-start;
+  gap: 40px;
+  width: 100%;
+  margin-top: 30px;
+  color: #597266;
+}
+
+.welcome-stats div {
+  display: grid;
+  gap: 2px;
+}
+
+.welcome-stats strong {
+  color: #162f25;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.welcome-stats span {
+  font-size: 11px;
+}
+
+.welcome-screen .entry-card .entry-arrow {
+  width: auto;
+  min-width: 100px;
+  padding: 0 4px;
+  background: transparent !important;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.welcome-screen .entry-card-student .entry-arrow {
+  color: #8cdda0;
+}
+
+.welcome-screen .entry-card:not(.entry-card-student) .entry-arrow {
+  color: #2e825b;
+}
+
+.welcome-screen.dark-mode .welcome-semester {
+  color: #c2d8c6;
+  background: rgba(24,62,46,.78);
+  border-color: rgba(130,201,145,.28);
+}
+
+.welcome-screen.dark-mode .welcome-stats {
+  color: #b5cfba;
+}
+
+.welcome-screen.dark-mode .welcome-stats strong {
+  color: #f2fff3;
+}
+
+@media (max-width: 760px) {
+  .welcome-stats {
+    justify-content: center;
+    gap: 22px;
+  }
+}

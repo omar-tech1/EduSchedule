@@ -594,28 +594,33 @@ function App() {
           <header className="welcome-brand">
             <img src={`${process.env.PUBLIC_URL}/college-logo.jpg`} alt="" />
             <div>
-              <strong>كلية التربية النوعية</strong>
-              <span>نظام جدول المحاضرات</span>
+              <strong>EduSchedule</strong>
+              <span>كلية التربية النوعية</span>
             </div>
           </header>
           <div className="welcome-intro">
-            <span>أهلاً بك</span>
-            <h1>اختر طريقة الدخول</h1>
-            <p>اعرض جدولك الدراسي أو سجّل الدخول لإدارة المحاضرات.</p>
+            <span className="welcome-semester"><i /> الفصل الدراسي الأول 2026</span>
+            <h1>جدول محاضراتك، <em>في مكان واحد</em></h1>
+            <p>شوف مواعيد محاضراتك وقاعاتك في ثواني، أو سجّل دخولك كمسؤول لإدارة الجدول من غير تعقيدات.</p>
           </div>
           <div className="entry-cards">
             <button className="entry-card entry-card-student" type="button" onClick={() => setShowStudentPortal(true)}>
               <span className="entry-card-icon"><GraduationCap size={34} /></span>
               <strong>طالب</strong>
-              <small>تصفح الجداول</small>
-              <span className="entry-arrow">←</span>
+              <small>تصفح الجدول بدون تسجيل</small>
+              <span className="entry-arrow">ابدأ الآن ←</span>
             </button>
             <button className="entry-card" type="button" onClick={() => setShowAdminLogin(true)}>
               <span className="entry-card-icon"><Users size={31} /></span>
               <strong>مسؤول</strong>
-              <small>تسجيل الدخول</small>
-              <span className="entry-arrow">←</span>
+              <small>إدارة المحاضرات والقاعات</small>
+              <span className="entry-arrow">تسجيل الدخول ←</span>
             </button>
+          </div>
+          <div className="welcome-stats">
+            <div><strong>4</strong><span>أقسام</span></div>
+            <div><strong>16</strong><span>فرقة دراسية</span></div>
+            <div><strong>+120</strong><span>محاضرة أسبوعيًا</span></div>
           </div>
           {showAdminLogin && <form className="welcome-login" onSubmit={signIn}>
             <div className="welcome-login-heading">
