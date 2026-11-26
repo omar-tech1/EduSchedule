@@ -1,0 +1,314 @@
+/* =========================================================================
+   EduSchedule v3 theme. Imported LAST (after index.css) from App.js.
+   Visual only: colors, radii, shadows, fonts, spacing. No layout logic.
+   Light by default, dark when the root has .dark-mode.
+   Screens: welcome (.welcome-v3), student portal, admin entry, dashboard,
+   modal, notices. Print rules of index.css are untouched.
+   ========================================================================= */
+
+/* ---------- WELCOME (light + dark) ---------- */
+#root .welcome-screen.welcome-v3 {
+  --text: #0f1913; --muted: #57625c; --green: #0e8f63; --gold: #d9a416;
+  --overlay: linear-gradient(to left, rgba(250,252,249,.96) 0%, rgba(250,252,249,.86) 34%, rgba(250,252,249,.50) 58%, rgba(250,252,249,.08) 82%, rgba(250,252,249,0) 100%);
+  --card-bg: rgba(255,255,255,.88); --card-border: rgba(255,255,255,.85); --card-shadow: 0 18px 45px rgba(23,43,34,.10);
+  --pill-bg: rgba(255,255,255,.72); --pill-border: rgba(15,25,19,.08); --pill-text: #3f4c45; --pill-dot: #17a25e;
+  --toggle-bg: rgba(255,255,255,.82); --toggle-border: rgba(15,25,19,.08); --toggle-icon: #22302a;
+  --brand-text: #101a14; --brand-sub: #66736b;
+  --icon-admin-bg: #e1f2e9; --icon-admin-fg: #0d8a5c;
+  --icon-student-bg: linear-gradient(145deg,#12a875,#0b7a52); --icon-student-fg: #fff;
+  --stat-num: #152019; --stat-label: #64716a;
+  --field-bg: rgba(255,255,255,.85); --field-border: rgba(15,25,19,.14);
+}
+#root .welcome-screen.welcome-v3.dark-mode {
+  --text: #f2f8f4; --muted: #b3c2b8; --green: #3fdc8f; --gold: #f0bf2e;
+  --overlay: linear-gradient(to left, rgba(8,19,25,.93) 0%, rgba(8,19,25,.82) 34%, rgba(8,19,25,.55) 58%, rgba(8,19,25,.20) 82%, rgba(8,19,25,.14) 100%);
+  --card-bg: rgba(18,30,26,.74); --card-border: rgba(255,255,255,.09); --card-shadow: 0 18px 45px rgba(0,0,0,.35);
+  --pill-bg: rgba(18,30,26,.6); --pill-border: rgba(255,255,255,.10); --pill-text: #c3d4c9; --pill-dot: #34d399;
+  --toggle-bg: rgba(13,24,30,.72); --toggle-border: rgba(255,255,255,.12); --toggle-icon: #e9f2ec;
+  --brand-text: #f2f8f4; --brand-sub: #9fb0a6;
+  --icon-admin-bg: rgba(62,207,142,.14); --icon-admin-fg: #3ecf8e;
+  --icon-student-bg: linear-gradient(145deg,#3ddc97,#23b37b); --icon-student-fg: #052e1f;
+  --stat-num: #eef6f1; --stat-label: #93a69b;
+  --field-bg: rgba(255,255,255,.06); --field-border: rgba(255,255,255,.14);
+}
+
+/* page: full cover photo + gradient, panel pinned to the right (RTL start) */
+#root .welcome-screen.welcome-v3 {
+  display: block !important; place-items: normal !important;
+  position: relative; min-height: 100vh; min-height: 100dvh;
+  color: var(--text);
+  background-color: #0b151b !important;
+  background-image: var(--overlay), var(--cover) !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+}
+#root .welcome-screen.welcome-v3::before,
+#root .welcome-screen.welcome-v3::after,
+#root .welcome-screen.welcome-v3 .welcome-panel::before,
+#root .welcome-screen.welcome-v3 .welcome-panel::after,
+#root .welcome-screen.welcome-v3 .welcome-photo { display: none !important; }
+
+#root .welcome-screen.welcome-v3 .welcome-panel {
+  position: relative !important; z-index: 1 !important; transform: none !important; translate: none !important; left: auto !important; right: auto !important; top: auto !important; inset-inline: auto !important;
+  display: flex !important; flex-direction: column !important; align-items: stretch !important;
+  width: auto !important; max-width: 690px !important; min-height: 100vh !important; min-height: 100dvh !important;
+  margin: 0 !important; padding: 26px clamp(24px,7.4vw,96px) 48px 24px !important;
+  background: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+  backdrop-filter: none !important; text-align: start !important;
+}
+#root .welcome-screen.welcome-v3 .welcome-brand,
+#root .welcome-screen.welcome-v3 .welcome-intro,
+#root .welcome-screen.welcome-v3 .entry-cards,
+#root .welcome-screen.welcome-v3 .welcome-login {
+  width: auto !important; margin-inline: 0 !important; text-align: start !important; justify-content: flex-start !important;
+}
+
+/* theme toggle */
+#root .welcome-screen.welcome-v3 .theme-toggle {
+  position: absolute !important; top: 22px !important; left: clamp(24px,6.2vw,80px) !important; right: auto !important;
+  width: 46px !important; height: 46px !important; border-radius: 50% !important;
+  border: 1px solid var(--toggle-border) !important; background: var(--toggle-bg) !important; color: var(--toggle-icon) !important;
+  backdrop-filter: blur(10px) !important; display: grid !important; place-items: center !important; cursor: pointer !important;
+  box-shadow: 0 6px 18px rgba(15,25,19,.10) !important; z-index: 5 !important;
+}
+
+/* brand */
+#root .welcome-screen.welcome-v3 .welcome-brand { display: flex !important; align-items: center !important; gap: 12px !important; }
+#root .welcome-screen.welcome-v3 .welcome-brand img {
+  width: 42px !important; height: 42px !important; border-radius: 12px !important; object-fit: cover !important; background: #fff !important; padding: 2px !important;
+  border: 1px solid rgba(255,255,255,.65) !important; box-shadow: 0 4px 14px rgba(15,25,19,.14) !important;
+}
+#root .welcome-screen.welcome-v3 .welcome-brand strong { display: block !important; font-size: 19px !important; font-weight: 800 !important; line-height: 1.2 !important; color: var(--brand-text) !important; }
+#root .welcome-screen.welcome-v3 .welcome-brand span { display: block !important; font-size: 12.5px !important; font-weight: 600 !important; color: var(--brand-sub) !important; }
+
+/* intro */
+#root .welcome-screen.welcome-v3 .welcome-intro { margin-top: 88px !important; }
+#root .welcome-screen.welcome-v3 .welcome-intro .welcome-semester {
+  display: inline-flex !important; align-items: center !important; gap: 8px !important; padding: 7px 16px !important; border-radius: 999px !important;
+  background: var(--pill-bg) !important; border: 1px solid var(--pill-border) !important; color: var(--pill-text) !important;
+  backdrop-filter: blur(10px) !important; font-size: 13px !important; font-weight: 600 !important; letter-spacing: 0 !important;
+  box-shadow: 0 4px 14px rgba(15,25,19,.06) !important;
+}
+#root .welcome-screen.welcome-v3 .welcome-semester i { width: 8px !important; height: 8px !important; border-radius: 50% !important; background: var(--pill-dot) !important; }
+#root .welcome-screen.welcome-v3 .welcome-intro h1 { margin: 20px 0 0; font-size: 37px; font-weight: 900; line-height: 1.35; color: var(--text); }
+#root .welcome-screen.welcome-v3 .welcome-intro h1 em {
+  font-style: normal !important; color: transparent !important; -webkit-background-clip: text !important; background-clip: text !important;
+  background-image: linear-gradient(to left, var(--gold) 0%, var(--green) 85%) !important;
+}
+#root .welcome-screen.welcome-v3 .welcome-intro p { margin: 14px 0 0 !important; max-width: 545px !important; font-size: 16px !important; font-weight: 500 !important; line-height: 1.9 !important; color: var(--muted) !important; }
+
+/* entry cards */
+#root .welcome-screen.welcome-v3 .entry-cards { display: grid !important; grid-template-columns: repeat(2, minmax(0,244px)) !important; gap: 14px !important; max-width: none !important; margin-top: 24px !important; }
+#root .welcome-screen.welcome-v3 .entry-card {
+  position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  min-height: 0; padding: 18px 22px 16px; text-align: start; cursor: pointer;
+  color: var(--text); background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: 20px; box-shadow: var(--card-shadow); backdrop-filter: blur(14px);
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+#root .welcome-screen.welcome-v3 .entry-card:hover,
+#root .welcome-screen.welcome-v3 .entry-card:focus-visible { transform: translateY(-3px); color: var(--text); background: var(--card-bg); box-shadow: var(--card-shadow); }
+#root .welcome-screen.welcome-v3 .entry-card-icon { width: 48px !important; height: 48px !important; margin: 0 0 4px !important; border-radius: 14px !important; display: grid !important; place-items: center !important; border: 0 !important; }
+#root .welcome-screen.welcome-v3 .entry-card-student .entry-card-icon { background: var(--icon-student-bg) !important; color: var(--icon-student-fg) !important; }
+#root .welcome-screen.welcome-v3 .entry-card-admin .entry-card-icon { background: var(--icon-admin-bg) !important; color: var(--icon-admin-fg) !important; }
+#root .welcome-screen.welcome-v3 .entry-card strong { font-size: 19px; font-weight: 800; line-height: 1.3; color: var(--text); }
+#root .welcome-screen.welcome-v3 .entry-card small,
+#root .welcome-screen.welcome-v3 .entry-card-student small { margin: 0 !important; font-size: 13.5px !important; font-weight: 500 !important; color: var(--muted) !important; }
+#root .welcome-screen.welcome-v3 .entry-arrow,
+#root .welcome-screen.welcome-v3 .entry-card:not(.entry-card-student) .entry-arrow {
+  position: static !important; width: auto !important; height: auto !important; margin-top: 10px !important; padding: 0 !important; border-radius: 0 !important;
+  background: none !important; box-shadow: none !important; display: block !important; font-size: 14.5px !important; font-weight: 700 !important; color: var(--green) !important;
+}
+
+/* stats */
+#root .welcome-screen.welcome-v3 .welcome-stats { display: flex !important; gap: 14px !important; margin-top: 30px !important; }
+#root .welcome-screen.welcome-v3 .welcome-stats div { text-align: center !important; }
+#root .welcome-screen.welcome-v3 .welcome-stats strong { display: block !important; font-size: 24px !important; font-weight: 800 !important; line-height: 1.2 !important; color: var(--stat-num) !important; }
+#root .welcome-screen.welcome-v3 .welcome-stats span { display: block !important; margin-top: 2px !important; font-size: 12.5px !important; font-weight: 600 !important; white-space: nowrap !important; color: var(--stat-label) !important; }
+
+/* inline admin login */
+#root .welcome-screen.welcome-v3 .welcome-login {
+  display: flex; flex-direction: column; gap: 12px; max-width: 502px; margin-top: 26px; padding: 24px 24px 20px;
+  color: var(--text); background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: 20px; box-shadow: var(--card-shadow); backdrop-filter: blur(14px);
+}
+#root .welcome-screen.welcome-v3 .welcome-login-heading strong { display: block; font-size: 18px; font-weight: 800; color: var(--text); }
+#root .welcome-screen.welcome-v3 .welcome-login-heading span,
+#root .welcome-screen.welcome-v3 .welcome-note { font-size: 13px !important; color: var(--muted) !important; }
+#root .welcome-screen.welcome-v3 .welcome-field { display: block; color: var(--text); }
+#root .welcome-screen.welcome-v3 .welcome-field span { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 700; color: var(--text); }
+#root .welcome-screen.welcome-v3 .welcome-field input {
+  width: 100%; padding: 11px 14px; font-size: 14px; border-radius: 12px; outline: none;
+  color: var(--text); background: var(--field-bg); border: 1px solid var(--field-border);
+}
+#root .welcome-screen.welcome-v3 .welcome-field input:focus { border-color: var(--green) !important; }
+#root .welcome-screen.welcome-v3 .welcome-submit {
+  padding: 12px !important; font-size: 15px !important; font-weight: 800 !important; color: #fff !important; border: 0 !important; border-radius: 12px !important;
+  background: linear-gradient(145deg,#12a875,#0b7a52) !important;
+}
+#root .welcome-screen.welcome-v3 .welcome-login-close { align-self: flex-start !important; background: none !important; border: 0 !important; font-size: 13.5px !important; font-weight: 700 !important; color: var(--green) !important; }
+
+/* mobile */
+@media (max-width: 760px) {
+  #root .welcome-screen.welcome-v3 { background-position: 38% center, 38% center !important; }
+  #root .welcome-screen.welcome-v3 .welcome-panel { max-width: none !important; padding: 22px 20px 40px !important; }
+  #root .welcome-screen.welcome-v3 .theme-toggle { top: 18px !important; left: 18px !important; width: 46px !important; height: 46px !important; }
+  #root .welcome-screen.welcome-v3 .welcome-intro { margin-top: 54px !important; }
+  #root .welcome-screen.welcome-v3 .welcome-intro h1 { font-size: 29px !important; }
+  #root .welcome-screen.welcome-v3 .welcome-intro p { font-size: 14.5px !important; }
+  #root .welcome-screen.welcome-v3 .entry-cards { grid-template-columns: 1fr !important; }
+  #root .welcome-screen.welcome-v3 .welcome-stats { justify-content: space-between !important; }
+  #root .welcome-screen.welcome-v3 .welcome-login { max-width: none !important; }
+}
+
+/* ---------- OTHER SCREENS ---------- */
+@media screen {
+#root .v3-screen {
+  --bg:#f6f8f6; --s1:#ffffff; --s2:#f1f5f2; --bd:#e4eae6; --tx:#0e1d15; --mu:#5d6f65;
+  --pr:#0f7a55; --pr2:#14a674; --onp:#ffffff; --ac:#f2a20c; --ring:rgba(15,122,85,.16);
+  --sh:0 1px 2px rgba(14,29,21,.05),0 12px 32px -12px rgba(14,29,21,.12);
+  --mesh1:#bff0d9; --mesh2:#fde9b8; --dng:#d92d4b; --dngbg:#fdecef; --okbg:#e6f6ee; --hov:#eef4f0;
+  --side:#ffffff; --head:#e6f3ec; --headtx:#0b5a3f;
+  color: var(--tx) !important; font-family: "Cairo", sans-serif;
+  background-color: var(--bg) !important;
+  background-image: radial-gradient(520px 520px at 100% 0, var(--mesh1) 0%, transparent 70%), radial-gradient(520px 520px at 0 100%, var(--mesh2) 0%, transparent 70%) !important;
+  background-attachment: scroll !important; background-repeat: no-repeat !important;
+}
+#root .v3-screen.dark-mode {
+  --bg:#070e0a; --s1:#0e1812; --s2:#13211a; --bd:#1e3027; --tx:#eaf4ee; --mu:#8fa699;
+  --pr:#34d399; --pr2:#10b981; --onp:#04150d; --ac:#fbbf24; --ring:rgba(52,211,153,.22);
+  --sh:0 1px 0 rgba(255,255,255,.03) inset,0 16px 40px -16px rgba(0,0,0,.7);
+  --mesh1:#0f4a34; --mesh2:#4a3508; --dng:#fb7185; --dngbg:rgba(251,113,133,.12); --okbg:rgba(52,211,153,.12); --hov:#18291f;
+  --side:#0e1812; --head:#14281e; --headtx:#7ee3b8;
+}
+#root .v3-screen, #root .v3-screen * { scroll-behavior: smooth; }
+#root .v3-screen h1, #root .v3-screen h2, #root .v3-screen h3, #root .v3-screen strong { color: var(--tx) !important; }
+#root .v3-screen p, #root .v3-screen small, #root .v3-screen time, #root .v3-screen .breadcrumb { color: var(--mu) !important; }
+#root .v3-screen .eyebrow { color: var(--pr) !important; font-weight: 800; letter-spacing: 0; }
+
+/* theme toggle */
+#root .v3-theme { width:40px; height:40px; flex:none; border-radius:12px; border:1px solid var(--bd); background:var(--s1); color:var(--tx); display:grid; place-items:center; cursor:pointer; box-shadow:none; padding:0; }
+#root .v3-theme:hover { background: var(--hov); }
+#root .admin-entry-card .v3-theme { position:absolute; top:18px; left:18px; }
+#root .student-header .v3-theme { margin-inline-start:auto; }
+#root .topbar-left .v3-theme { margin-inline-end:12px; }
+
+/* buttons */
+#root .v3-screen .primary-button, #root .v3-screen .welcome-submit {
+  background: linear-gradient(135deg,var(--pr),var(--pr2)) !important; color: var(--onp) !important; border: 0 !important;
+  border-radius: 12px !important; font-weight: 700; box-shadow: 0 8px 20px -8px var(--pr) !important;
+}
+#root .v3-screen .primary-button:hover { filter: brightness(1.05); transform: none; }
+#root .v3-screen .secondary-button, #root .v3-screen .student-back-button, #root .v3-screen .entry-change-button {
+  background: var(--s1) !important; color: var(--tx) !important; border: 1px solid var(--bd) !important; border-radius: 12px !important; box-shadow: none !important; font-weight: 600;
+}
+#root .v3-screen .secondary-button:hover, #root .v3-screen .student-back-button:hover, #root .v3-screen .entry-change-button:hover { background: var(--hov) !important; }
+#root .v3-screen .icon-button { background: var(--s1); color: var(--tx); border: 1px solid var(--bd); border-radius: 12px; }
+#root .v3-screen .icon-button:hover { background: var(--hov); }
+
+/* fields */
+#root .v3-screen .form-field span { color: var(--tx) !important; font-weight: 700; font-size: 13px; }
+#root .v3-screen input, #root .v3-screen select {
+  background: var(--s2) !important; color: var(--tx) !important; border: 1px solid var(--bd) !important; border-radius: 12px !important; box-shadow: none !important;
+}
+#root .v3-screen input::placeholder { color: var(--mu) !important; opacity: .8; }
+#root .v3-screen input:focus, #root .v3-screen select:focus { border-color: var(--pr) !important; box-shadow: 0 0 0 4px var(--ring) !important; outline: none; }
+#root .v3-screen.dark-mode input[type=time] { color-scheme: dark; }
+#root .v3-screen.dark-mode select, #root .v3-screen.dark-mode option { color-scheme: dark; }
+
+/* cards */
+#root .v3-screen .student-card, #root .v3-screen .admin-entry-card, #root .v3-screen .stat-card, #root .v3-screen .schedule-section,
+#root .v3-screen .student-results, #root .v3-screen .lecture-modal, #root .v3-screen .student-day-card, #root .v3-screen .admin-day-card {
+  background: var(--s1) !important; border: 1px solid var(--bd) !important; border-radius: 20px !important; box-shadow: var(--sh) !important; color: var(--tx);
+}
+#root .v3-screen .student-card::before, #root .v3-screen .student-card::after, #root .v3-screen .admin-entry-card::before, #root .v3-screen .admin-entry-card::after,
+#root .v3-screen.student-portal::before, #root .v3-screen.student-portal::after, #root .v3-screen.admin-entry-screen::before, #root .v3-screen.admin-entry-screen::after,
+#root .v3-screen .student-main::before, #root .v3-screen .student-main::after { display:none !important; }
+#root .v3-screen .student-results { box-shadow: none !important; background: var(--s1) !important; }
+#root .v3-screen .student-results-heading { border-bottom: 1px solid var(--bd) !important; }
+#root .v3-screen .student-results-heading span { color: var(--mu) !important; }
+
+/* student header */
+#root .v3-screen .student-header { align-items:center; gap:12px; }
+#root .v3-screen .student-header h1 { font-size:20px; font-weight:800; }
+#root .v3-screen .student-header p { margin:0; font-size:12.5px; }
+#root .v3-screen .student-brand-icon, #root .v3-screen .admin-entry-logo { background:#fff !important; border:1px solid var(--bd) !important; border-radius:14px !important; box-shadow:none !important; }
+#root .v3-screen .student-footnote { color: var(--mu) !important; }
+
+/* schedule grids (student + admin) */
+#root .v3-screen .student-schedule-grid, #root .v3-screen .admin-schedule-grid { background: var(--s2) !important; border: 1px solid var(--bd) !important; border-radius: 16px !important; overflow: hidden; gap: 0; }
+#root .v3-screen .student-schedule-corner, #root .v3-screen .student-schedule-day, #root .v3-screen .admin-schedule-corner, #root .v3-screen .admin-schedule-header, #root .v3-screen .admin-schedule-day-label {
+  background: var(--head) !important; color: var(--headtx) !important; border-color: var(--bd) !important; font-weight: 800;
+}
+#root .v3-screen .student-schedule-cell, #root .v3-screen .admin-schedule-cell { background: var(--s1) !important; border-color: var(--bd) !important; }
+#root .v3-screen .student-lecture-card, #root .v3-screen .admin-lecture-card {
+  background: linear-gradient(160deg,var(--okbg),var(--s1)) !important; border: 1px solid var(--bd) !important; border-inline-start: 3px solid var(--pr) !important; border-radius: 10px !important; box-shadow: none !important;
+}
+#root .v3-screen .student-lecture-card strong, #root .v3-screen .admin-lecture-card strong { color: var(--tx) !important; }
+#root .v3-screen .student-lecture-card span, #root .v3-screen .student-lecture-card small, #root .v3-screen .admin-lecture-card span, #root .v3-screen .admin-lecture-card small { color: var(--mu) !important; }
+#root .v3-screen .admin-lecture-actions .icon-button { width:26px; height:26px; border-radius:8px; }
+#root .v3-screen .delete-action { color: var(--dng) !important; }
+#root .v3-screen .edit-action { color: var(--pr) !important; }
+
+/* mobile day cards */
+#root .v3-screen .student-day-card header, #root .v3-screen .admin-day-card header { background: var(--head) !important; color: var(--headtx) !important; font-weight: 800; }
+#root .v3-screen .student-day-lecture, #root .v3-screen .admin-day-lecture { border-color: var(--bd) !important; background: transparent !important; }
+#root .v3-screen .student-day-lecture time, #root .v3-screen .admin-day-lecture time { color: var(--pr) !important; font-weight: 700; direction: ltr; unicode-bidi: plaintext; }
+#root .v3-screen .student-day-empty { color: var(--mu) !important; }
+#root .v3-screen .empty-state { color: var(--mu) !important; background: transparent !important; border-color: var(--bd) !important; }
+#root .v3-screen .empty-state svg { color: var(--pr); }
+
+/* admin entry */
+#root .v3-screen.admin-entry-screen { position: relative; }
+#root .v3-screen .admin-entry-card { position: relative; }
+#root .v3-screen .admin-entry-department { background: var(--s1) !important; border: 1px solid var(--bd) !important; border-radius: 18px !important; box-shadow: none !important; color: var(--tx) !important; transition: transform .15s, border-color .15s; }
+#root .v3-screen .admin-entry-department:hover { transform: translateY(-3px); border-color: var(--pr) !important; background: var(--s1) !important; box-shadow: var(--sh) !important; }
+#root .v3-screen .admin-entry-department > span { background: var(--okbg) !important; color: var(--pr) !important; border-radius: 14px !important; }
+#root .v3-screen .admin-entry-department small { color: var(--mu) !important; }
+#root .v3-screen .selected-department { background: var(--okbg) !important; color: var(--pr) !important; border: 1px solid var(--bd) !important; border-radius: 12px !important; }
+
+/* dashboard */
+#root .v3-screen.app-shell { background-color: var(--bg) !important; }
+#root .v3-screen .sidebar { background: var(--side) !important; border-left: 1px solid var(--bd) !important; color: var(--tx); box-shadow: none !important; }
+#root .v3-screen .brand h2 { color: var(--tx) !important; }
+#root .v3-screen .brand span, #root .v3-screen .sidebar-label { color: var(--mu) !important; }
+#root .v3-screen .brand { border-bottom-color: var(--bd) !important; }
+#root .v3-screen .brand-icon, #root .v3-screen .sidebar-help-icon { background: linear-gradient(135deg,var(--pr),var(--pr2)) !important; color: var(--onp) !important; border-radius: 12px !important; }
+#root .v3-screen .nav-item { color: var(--mu) !important; background: transparent !important; border-radius: 12px !important; border: 0 !important; font-weight: 600; box-shadow: none !important; }
+#root .v3-screen .nav-item:hover { background: var(--hov) !important; color: var(--tx) !important; }
+#root .v3-screen .nav-item.active { background: var(--okbg) !important; color: var(--pr) !important; font-weight: 800; }
+#root .v3-screen .sidebar-bottom { background: var(--s2) !important; border: 1px solid var(--bd) !important; border-radius: 16px !important; color: var(--tx); }
+#root .v3-screen .topbar { background: color-mix(in srgb, var(--bg) 80%, transparent) !important; backdrop-filter: blur(14px); border-bottom: 1px solid var(--bd) !important; box-shadow: none !important; }
+#root .v3-screen .user-avatar { background: linear-gradient(135deg,var(--pr),var(--pr2)) !important; color: var(--onp) !important; }
+#root .v3-screen .user-info span { color: var(--mu) !important; }
+#root .v3-screen .welcome-section { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+#root .v3-screen .welcome-section h2 span { color: var(--pr) !important; }
+#root .v3-screen .stat-text span, #root .v3-screen .stat-text small { color: var(--mu) !important; }
+#root .v3-screen .stat-icon { border-radius: 14px !important; }
+#root .v3-screen .stat-icon.purple, #root .v3-screen .stat-icon.green { background: var(--okbg) !important; color: var(--pr) !important; }
+#root .v3-screen .stat-icon.blue { background: rgba(59,130,246,.12) !important; color: #3b82f6 !important; }
+#root .v3-screen .stat-icon.orange { background: rgba(242,162,12,.14) !important; color: var(--ac) !important; }
+#root .v3-screen .section-heading h2 svg { color: var(--pr); }
+#root .v3-screen .search-box { background: var(--s2) !important; border: 1px solid var(--bd) !important; border-radius: 12px !important; color: var(--mu); }
+#root .v3-screen .search-box input { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+#root .v3-screen .table-footer { border-top: 1px solid var(--bd) !important; color: var(--mu) !important; background: transparent !important; }
+#root .v3-screen .table-footer strong { color: var(--tx) !important; }
+#root .v3-screen .status-dot { background: var(--pr2) !important; }
+
+/* notices */
+#root .v3-screen .notice { border-radius: 14px !important; border: 1px solid var(--bd) !important; box-shadow: none !important; }
+#root .v3-screen .notice.error { background: var(--dngbg) !important; color: var(--dng) !important; border-color: color-mix(in srgb, var(--dng) 35%, transparent) !important; }
+#root .v3-screen .notice.success { background: var(--okbg) !important; color: var(--pr) !important; border-color: color-mix(in srgb, var(--pr) 35%, transparent) !important; }
+#root .v3-screen .notice span { color: inherit !important; }
+#root .v3-screen .notice .icon-button { background: transparent; border: 0; color: inherit; }
+
+/* modal */
+#root .v3-screen .modal-backdrop { background: rgba(7,14,10,.55) !important; backdrop-filter: blur(4px); }
+#root .v3-screen .lecture-modal { color: var(--tx); }
+#root .v3-screen .modal-header { border-bottom: 1px solid var(--bd) !important; background: transparent !important; }
+#root .v3-screen .form-note { background: var(--s2) !important; color: var(--mu) !important; border: 1px solid var(--bd) !important; border-radius: 12px !important; }
+#root .v3-screen .modal-actions { background: transparent !important; border-top: 1px solid var(--bd) !important; }
+}
+
