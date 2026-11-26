@@ -188,6 +188,14 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const scopedDepartment = session?.user?.app_metadata?.department || "";
+    if (scopedDepartment) {
+      setAdminDepartmentChoice(scopedDepartment);
+      setDepartmentFilter(scopedDepartment);
+    }
+  }, [session]);
+
+  useEffect(() => {
     if (!session) {
       setLectures([]);
       return;
@@ -329,7 +337,7 @@ function App() {
     });
   }
 
-  const accountDepartment = session?.user?.user_metadata?.department || "";
+  const accountDepartment = session?.user?.app_metadata?.department || "";
   const departmentScope = DEPARTMENTS.includes(accountDepartment) ? accountDepartment : "";
 
   const filteredLectures = lectures
